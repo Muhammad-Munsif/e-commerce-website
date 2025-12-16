@@ -1,52 +1,52 @@
-import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from 'lucide-react';
+import React, { useState } from "react";
+import { Mail, Phone, MapPin, Clock, Send, MessageSquare } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
   });
 
   const contactInfo = [
     {
       icon: <Phone className="w-6 h-6" />,
-      title: 'Phone',
-      details: '+1 (555) 123-4567',
-      subtitle: 'Mon-Fri 9am-6pm EST'
+      title: "Phone",
+      details: "+1 (555) 123-4567",
+      subtitle: "Mon-Fri 9am-6pm EST",
     },
     {
       icon: <Mail className="w-6 h-6" />,
-      title: 'Email',
-      details: 'support@luxuryhaven.com',
-      subtitle: 'Response within 24 hours'
+      title: "Email",
+      details: "support@luxuryhaven.com",
+      subtitle: "Response within 24 hours",
     },
     {
       icon: <MapPin className="w-6 h-6" />,
-      title: 'Store Location',
-      details: '123 Luxury Avenue',
-      subtitle: 'New York, NY 10001'
+      title: "Store Location",
+      details: "123 Luxury Avenue",
+      subtitle: "New York, NY 10001",
     },
     {
       icon: <Clock className="w-6 h-6" />,
-      title: 'Business Hours',
-      details: 'Monday - Friday',
-      subtitle: '9:00 AM - 6:00 PM EST'
-    }
+      title: "Business Hours",
+      details: "Monday - Friday",
+      subtitle: "9:00 AM - 6:00 PM EST",
+    },
   ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    console.log("Form submitted:", formData);
+    alert("Thank you for your message! We will get back to you soon.");
+    setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -59,14 +59,17 @@ const Contact = () => {
             Contact <span className="text-gold">Us</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Have questions about our jewelry, wallets, or perfumes? We're here to help.
+            Have questions about our jewelry, wallets, or perfumes? We're here
+            to help.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Information */}
           <div>
-            <h2 className="text-2xl font-playfair font-bold mb-8">Get in Touch</h2>
+            <h2 className="text-2xl font-playfair font-bold mb-8">
+              Get in Touch
+            </h2>
             <div className="space-y-8">
               {contactInfo.map((info, index) => (
                 <div key={index} className="flex items-start">
@@ -90,16 +93,30 @@ const Contact = () => {
               </h3>
               <div className="space-y-4">
                 <div className="border-b pb-4">
-                  <h4 className="font-semibold mb-1">What is your return policy?</h4>
-                  <p className="text-gray-600 text-sm">30-day return policy for unused items with original packaging.</p>
+                  <h4 className="font-semibold mb-1">
+                    What is your return policy?
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    30-day return policy for unused items with original
+                    packaging.
+                  </p>
                 </div>
                 <div className="border-b pb-4">
-                  <h4 className="font-semibold mb-1">Do you offer international shipping?</h4>
-                  <p className="text-gray-600 text-sm">Yes, we ship to over 50 countries worldwide.</p>
+                  <h4 className="font-semibold mb-1">
+                    Do you offer international shipping?
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    Yes, we ship to over 50 countries worldwide.
+                  </p>
                 </div>
                 <div>
-                  <h4 className="font-semibold mb-1">Can I customize jewelry?</h4>
-                  <p className="text-gray-600 text-sm">Yes, we offer customization services for select jewelry items.</p>
+                  <h4 className="font-semibold mb-1">
+                    Can I customize jewelry?
+                  </h4>
+                  <p className="text-gray-600 text-sm">
+                    Yes, we offer customization services for select jewelry
+                    items.
+                  </p>
                 </div>
               </div>
             </div>
@@ -108,11 +125,15 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-xl p-8">
-              <h2 className="text-2xl font-playfair font-bold mb-6">Send Us a Message</h2>
+              <h2 className="text-2xl font-playfair font-bold mb-6">
+                Send Us a Message
+              </h2>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-gray-700 mb-2">Full Name *</label>
+                    <label className="block text-gray-700 mb-2">
+                      Full Name *
+                    </label>
                     <input
                       type="text"
                       name="name"
@@ -124,7 +145,9 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-gray-700 mb-2">Email Address *</label>
+                    <label className="block text-gray-700 mb-2">
+                      Email Address *
+                    </label>
                     <input
                       type="email"
                       name="email"
@@ -184,12 +207,18 @@ const Contact = () => {
               <div className="h-64 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
                 <div className="text-center">
                   <MapPin className="w-12 h-12 text-gold mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">Visit Our Flagship Store</h3>
-                  <p className="text-gray-600">123 Luxury Avenue, New York, NY 10001</p>
+                  <h3 className="text-xl font-semibold mb-2">
+                    Visit Our Flagship Store
+                  </h3>
+                  <p className="text-gray-600">
+                    123 Luxury Avenue, New York, NY 10001
+                  </p>
                 </div>
               </div>
               <div className="p-6">
-                <h4 className="font-semibold text-lg mb-2">Store Information</h4>
+                <h4 className="font-semibold text-lg mb-2">
+                  Store Information
+                </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-600">
                   <div>
                     <strong>Parking:</strong> Available in building garage
@@ -208,8 +237,12 @@ const Contact = () => {
 
         {/* Support Section */}
         <div className="mt-16 bg-gradient-to-r from-gold/10 to-bronze/10 rounded-2xl p-8 text-center">
-          <h2 className="text-2xl font-playfair font-bold mb-4">Need Immediate Assistance?</h2>
-          <p className="text-gray-600 mb-6">Our customer support team is ready to help you.</p>
+          <h2 className="text-2xl font-playfair font-bold mb-4">
+            Need Immediate Assistance?
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Our customer support team is ready to help you.
+          </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <a
               href="tel:+15551234567"
@@ -233,7 +266,6 @@ const Contact = () => {
 };
 
 export default Contact;
-
 
 // import React, { useState } from 'react';
 // import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
