@@ -1,12 +1,28 @@
-import React from 'react';
-import { Award, Users, Globe, Heart, Sparkles } from 'lucide-react';
+import React from "react";
+import { Award, Users, Globe, Heart, Sparkles } from "lucide-react";
 
 const About = () => {
   const values = [
-    { icon: <Award className="w-8 h-8" />, title: 'Quality First', description: 'Only premium materials and craftsmanship' },
-    { icon: <Heart className="w-8 h-8" />, title: 'Customer Love', description: 'Your satisfaction is our priority' },
-    { icon: <Sparkles className="w-8 h-8" />, title: 'Excellence', description: 'Striving for perfection in every detail' },
-    { icon: <Globe className="w-8 h-8" />, title: 'Global Standards', description: 'World-class products and service' },
+    {
+      icon: <Award className="w-8 h-8" />,
+      title: "Quality First",
+      description: "Only premium materials and craftsmanship",
+    },
+    {
+      icon: <Heart className="w-8 h-8" />,
+      title: "Customer Love",
+      description: "Your satisfaction is our priority",
+    },
+    {
+      icon: <Sparkles className="w-8 h-8" />,
+      title: "Excellence",
+      description: "Striving for perfection in every detail",
+    },
+    {
+      icon: <Globe className="w-8 h-8" />,
+      title: "Global Standards",
+      description: "World-class products and service",
+    },
   ];
 
   return (
@@ -18,7 +34,8 @@ const About = () => {
             About <span className="text-gold">Luxury Haven</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Where elegance meets excellence. We curate the finest jewelry, wallets, and perfumes for the discerning customer.
+            Where elegance meets excellence. We curate the finest jewelry,
+            wallets, and perfumes for the discerning customer.
           </p>
         </div>
 
@@ -27,16 +44,19 @@ const About = () => {
           <div>
             <h2 className="text-3xl font-playfair font-bold mb-6">Our Story</h2>
             <p className="text-gray-600 mb-4">
-              Founded in 2010, Luxury Haven began as a small boutique dedicated to bringing exceptional quality 
-              jewelry to our community. What started with a passion for exquisite craftsmanship has grown into 
+              Founded in 2010, Luxury Haven began as a small boutique dedicated
+              to bringing exceptional quality jewelry to our community. What
+              started with a passion for exquisite craftsmanship has grown into
               a premier destination for luxury accessories.
             </p>
             <p className="text-gray-600 mb-4">
-              Today, we've expanded our collection to include premium wallets and an exclusive line of perfumes, 
-              each carefully selected to embody sophistication and quality.
+              Today, we've expanded our collection to include premium wallets
+              and an exclusive line of perfumes, each carefully selected to
+              embody sophistication and quality.
             </p>
             <p className="text-gray-600">
-              Every piece in our collection tells a story - of tradition, innovation, and timeless elegance.
+              Every piece in our collection tells a story - of tradition,
+              innovation, and timeless elegance.
             </p>
           </div>
           <div className="relative">
@@ -54,10 +74,15 @@ const About = () => {
 
         {/* Values */}
         <div className="mb-20">
-          <h2 className="text-3xl font-playfair font-bold text-center mb-12">Our Values</h2>
+          <h2 className="text-3xl font-playfair font-bold text-center mb-12">
+            Our Values
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <div key={index} className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition">
+              <div
+                key={index}
+                className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition"
+              >
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gold text-white rounded-full mb-4">
                   {value.icon}
                 </div>
@@ -70,7 +95,9 @@ const About = () => {
 
         {/* Collections */}
         <div className="bg-gradient-to-r from-gray-50 to-gold/10 rounded-2xl p-12">
-          <h2 className="text-3xl font-playfair font-bold text-center mb-8">Our Collections</h2>
+          <h2 className="text-3xl font-playfair font-bold text-center mb-8">
+            Our Collections
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <div className="text-5xl font-bold text-gold mb-2">500+</div>
@@ -95,4 +122,3 @@ const About = () => {
 };
 
 export default About;
-

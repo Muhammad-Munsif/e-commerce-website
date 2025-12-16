@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-
 const ProductListItem = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
 
-  const increaseQuantity = () => setQuantity(prev => prev + 1);
-  const decreaseQuantity = () => setQuantity(prev => (prev > 1 ? prev - 1 : 1));
-  
+  const increaseQuantity = () => setQuantity((prev) => prev + 1);
+  const decreaseQuantity = () =>
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
   // Calculate total price with discount
   const calculateTotalPrice = () => {
     let price = product.price;
@@ -16,15 +16,18 @@ const ProductListItem = ({ product }) => {
     return (price * quantity).toFixed(2);
   };
 
-  const discountedPrice = product.discount && product.discount > 0 
-    ? (product.price * (1 - product.discount / 100)).toFixed(2)
-    : product.price.toFixed(2);
+  const discountedPrice =
+    product.discount && product.discount > 0
+      ? (product.price * (1 - product.discount / 100)).toFixed(2)
+      : product.price.toFixed(2);
 
   const renderStars = (rating) => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
       if (i <= Math.floor(rating || 4.5)) {
-        stars.push(<Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />);
+        stars.push(
+          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+        );
       } else {
         stars.push(<Star key={i} className="w-4 h-4 text-gray-300" />);
       }
@@ -47,13 +50,15 @@ const ProductListItem = ({ product }) => {
           </div>
         )}
       </div>
-      
+
       {/* Product Details */}
       <div className="flex-1">
         <div className="flex flex-col md:flex-row md:items-start justify-between mb-4">
           <div className="mb-4 md:mb-0 md:mr-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">{product.name}</h3>
-            
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              {product.name}
+            </h3>
+
             {/* Category Tags */}
             <div className="flex flex-wrap gap-2 mb-3">
               {product.mainCategory && (
@@ -67,26 +72,27 @@ const ProductListItem = ({ product }) => {
                 </span>
               )}
             </div>
-            
+
             {/* Description */}
             <p className="text-gray-600 mb-3 line-clamp-2">
-              {product.description || 'Premium quality with authentic materials'}
+              {product.description ||
+                "Premium quality with authentic materials"}
             </p>
-            
+
             {/* Rating */}
             <div className="flex items-center">
-              <div className="flex mr-2">
-                {renderStars(product.rating)}
-              </div>
+              <div className="flex mr-2">{renderStars(product.rating)}</div>
               <span className="text-gray-500 text-sm">
                 ({product.reviews || 0} reviews)
               </span>
             </div>
           </div>
-          
+
           {/* Price */}
           <div className="text-right mb-4 md:mb-0">
-            <div className="text-2xl font-bold text-gray-900">${discountedPrice}</div>
+            <div className="text-2xl font-bold text-gray-900">
+              ${discountedPrice}
+            </div>
             {product.discount > 0 && (
               <div className="text-lg text-gray-400 line-through">
                 ${product.price.toFixed(2)}
@@ -103,7 +109,11 @@ const ProductListItem = ({ product }) => {
               <button
                 onClick={decreaseQuantity}
                 disabled={quantity <= 1}
-                className={`px-3 py-2 ${quantity <= 1 ? 'text-gray-300 cursor-not-allowed' : 'text-gray-700 hover:text-gold'}`}
+                className={`px-3 py-2 ${
+                  quantity <= 1
+                    ? "text-gray-300 cursor-not-allowed"
+                    : "text-gray-700 hover:text-gold"
+                }`}
               >
                 <Minus className="w-4 h-4" />
               </button>
@@ -117,7 +127,7 @@ const ProductListItem = ({ product }) => {
                 <Plus className="w-4 h-4" />
               </button>
             </div>
-            
+
             {/* Total Price Display */}
             {quantity > 1 && (
               <div className="ml-6 pl-6 border-l">
@@ -128,7 +138,7 @@ const ProductListItem = ({ product }) => {
               </div>
             )}
           </div>
-          
+
           {/* Action Buttons */}
           <div className="flex space-x-3">
             <button className="border border-gold text-gold px-6 py-2 rounded-lg hover:bg-gold hover:text-white transition-colors font-medium">
@@ -145,4 +155,4 @@ const ProductListItem = ({ product }) => {
   );
 };
 
-export default ProductListItem
+export default ProductListItem;
