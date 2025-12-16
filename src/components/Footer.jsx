@@ -1,20 +1,34 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin, CreditCard } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Youtube,
+  Mail,
+  Phone,
+  MapPin,
+  CreditCard,
+} from "lucide-react";
 
 const Footer = () => {
   const categories = [
-    { name: 'Rings', path: '/category/jewelry/rings' },
-    { name: 'Pendants', path: '/category/jewelry/pendants' },
-    { name: 'Leather Wallets', path: '/category/wallets/leather' },
-    { name: 'Floral Perfumes', path: '/category/perfumes/floral' },
-    { name: 'Designer Wallets', path: '/category/wallets/designer' },
-    { name: 'Woody Perfumes', path: '/category/perfumes/woody' },
+    { name: "Rings", path: "/category/jewelry/rings" },
+    { name: "Pendants", path: "/category/jewelry/pendants" },
+    { name: "Leather Wallets", path: "/category/wallets/leather" },
+    { name: "Floral Perfumes", path: "/category/perfumes/floral" },
+    { name: "Designer Wallets", path: "/category/wallets/designer" },
+    { name: "Woody Perfumes", path: "/category/perfumes/woody" },
   ];
 
   const perfumes = [
-    'Floral Scents', 'Woody Scents', 'Fresh Scents', 'Oriental Scents',
-    'Citrus Scents', 'Gourmand Scents', 'Aquatic Scents'
+    "Floral Scents",
+    "Woody Scents",
+    "Fresh Scents",
+    "Oriental Scents",
+    "Citrus Scents",
+    "Gourmand Scents",
+    "Aquatic Scents",
   ];
 
   return (
@@ -29,23 +43,38 @@ const Footer = () => {
               </div>
               <div>
                 <span className="text-2xl font-playfair font-bold">Luxury</span>
-                <span className="text-2xl font-playfair font-bold text-gold">Haven</span>
+                <span className="text-2xl font-playfair font-bold text-gold">
+                  Haven
+                </span>
               </div>
             </div>
             <p className="text-gray-400 mb-6">
-              Premium jewelry, luxury wallets, and exquisite perfumes. Experience elegance redefined.
+              Premium jewelry, luxury wallets, and exquisite perfumes.
+              Experience elegance redefined.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="bg-gray-800 p-2 rounded-full hover:bg-gold transition">
+              <a
+                href="#"
+                className="bg-gray-800 p-2 rounded-full hover:bg-gold transition"
+              >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="bg-gray-800 p-2 rounded-full hover:bg-gold transition">
+              <a
+                href="#"
+                className="bg-gray-800 p-2 rounded-full hover:bg-gold transition"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="bg-gray-800 p-2 rounded-full hover:bg-gold transition">
+              <a
+                href="#"
+                className="bg-gray-800 p-2 rounded-full hover:bg-gold transition"
+              >
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="bg-gray-800 p-2 rounded-full hover:bg-gold transition">
+              <a
+                href="#"
+                className="bg-gray-800 p-2 rounded-full hover:bg-gold transition"
+              >
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
@@ -53,11 +82,16 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-800">Shop Categories</h3>
+            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-800">
+              Shop Categories
+            </h3>
             <ul className="space-y-3">
               {categories.map((category) => (
                 <li key={category.name}>
-                  <Link to={category.path} className="text-gray-400 hover:text-gold transition">
+                  <Link
+                    to={category.path}
+                    className="text-gray-400 hover:text-gold transition"
+                  >
                     {category.name}
                   </Link>
                 </li>
@@ -67,11 +101,18 @@ const Footer = () => {
 
           {/* Perfume Scents */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-800">Perfume Scents</h3>
+            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-800">
+              Perfume Scents
+            </h3>
             <ul className="space-y-3">
               {perfumes.map((scent) => (
                 <li key={scent}>
-                  <Link to={`/category/perfumes/${scent.toLowerCase().replace(' ', '-')}`} className="text-gray-400 hover:text-gold transition">
+                  <Link
+                    to={`/category/perfumes/${scent
+                      .toLowerCase()
+                      .replace(" ", "-")}`}
+                    className="text-gray-400 hover:text-gold transition"
+                  >
                     {scent}
                   </Link>
                 </li>
@@ -81,7 +122,9 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-800">Contact Us</h3>
+            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-800">
+              Contact Us
+            </h3>
             <div className="space-y-4">
               <div className="flex items-center">
                 <Phone className="w-5 h-5 text-gold mr-3" />
@@ -125,12 +168,23 @@ const Footer = () => {
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p>&copy; {new Date().getFullYear()} Luxury Haven. All rights reserved.</p>
+            <p>
+              &copy; {new Date().getFullYear()} Luxury Haven. All rights
+              reserved.
+            </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
-              <Link to="/terms" className="hover:text-white">Terms of Service</Link>
-              <Link to="/shipping" className="hover:text-white">Shipping Policy</Link>
-              <Link to="/returns" className="hover:text-white">Return Policy</Link>
+              <Link to="/privacy" className="hover:text-white">
+                Privacy Policy
+              </Link>
+              <Link to="/terms" className="hover:text-white">
+                Terms of Service
+              </Link>
+              <Link to="/shipping" className="hover:text-white">
+                Shipping Policy
+              </Link>
+              <Link to="/returns" className="hover:text-white">
+                Return Policy
+              </Link>
             </div>
           </div>
         </div>
