@@ -1,6 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Menu, X, ShoppingBag, Search, User, Heart, ChevronDown, ChevronRight, ShoppingCart } from 'lucide-react';
+import React, { useState, useEffect, useRef } from "react";
+import { Link, NavLink } from "react-router-dom";
+import {
+  Menu,
+  X,
+  ShoppingBag,
+  Search,
+  User,
+  Heart,
+  ChevronDown,
+  ChevronRight,
+  ShoppingCart,
+} from "lucide-react";
 
 const Navbar = ({ cartItems = 3 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,41 +21,41 @@ const Navbar = ({ cartItems = 3 }) => {
 
   // Menu structure as requested
   const menuItems = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Shop', path: '/shop' },
-    { name: 'Contact', path: '/contact' }
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Shop", path: "/shop" },
+    { name: "Contact", path: "/contact" },
   ];
 
   // Category structure
   const categories = [
     {
-      name: 'Jewelry',
+      name: "Jewelry",
       submenu: [
-        { name: 'Rings', path: '/category/jewelry/rings' },
-        { name: 'Pendants', path: '/category/jewelry/pendants' }
-      ]
+        { name: "Rings", path: "/category/jewelry/rings" },
+        { name: "Pendants", path: "/category/jewelry/pendants" },
+      ],
     },
     {
-      name: 'Wallets',
+      name: "Wallets",
       submenu: [
-        { name: 'Leather Wallets', path: '/category/wallets/leather' },
-        { name: 'Designer Wallets', path: '/category/wallets/designer' },
-        { name: 'RFID Wallets', path: '/category/wallets/rfid' }
-      ]
+        { name: "Leather Wallets", path: "/category/wallets/leather" },
+        { name: "Designer Wallets", path: "/category/wallets/designer" },
+        { name: "RFID Wallets", path: "/category/wallets/rfid" },
+      ],
     },
     {
-      name: 'Perfumes',
+      name: "Perfumes",
       submenu: [
-        { name: 'Floral Scents', path: '/category/perfumes/floral' },
-        { name: 'Woody Scents', path: '/category/perfumes/woody' },
-        { name: 'Fresh Scents', path: '/category/perfumes/fresh' },
-        { name: 'Oriental Scents', path: '/category/perfumes/oriental' },
-        { name: 'Citrus Scents', path: '/category/perfumes/citrus' },
-        { name: 'Gourmand Scents', path: '/category/perfumes/gourmand' },
-        { name: 'Aquatic Scents', path: '/category/perfumes/aquatic' }
-      ]
-    }
+        { name: "Floral Scents", path: "/category/perfumes/floral" },
+        { name: "Woody Scents", path: "/category/perfumes/woody" },
+        { name: "Fresh Scents", path: "/category/perfumes/fresh" },
+        { name: "Oriental Scents", path: "/category/perfumes/oriental" },
+        { name: "Citrus Scents", path: "/category/perfumes/citrus" },
+        { name: "Gourmand Scents", path: "/category/perfumes/gourmand" },
+        { name: "Aquatic Scents", path: "/category/perfumes/aquatic" },
+      ],
+    },
   ];
 
   // Handle category click
@@ -78,9 +88,9 @@ const Navbar = ({ cartItems = 3 }) => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -96,7 +106,11 @@ const Navbar = ({ cartItems = 3 }) => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2" onClick={closeAllMenus}>
+          <Link
+            to="/"
+            className="flex items-center space-x-2"
+            onClick={closeAllMenus}
+          >
             <div className="relative">
               <div className="w-10 h-10 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center">
                 <ShoppingCart className="w-6 h-6 text-white" />
@@ -104,8 +118,12 @@ const Navbar = ({ cartItems = 3 }) => {
               <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-2 border-white"></div>
             </div>
             <div>
-              <span className="text-2xl font-playfair font-bold text-gray-800">Luxury</span>
-              <span className="text-2xl font-playfair font-bold text-gold">Haven</span>
+              <span className="text-2xl font-playfair font-bold text-gray-800">
+                Luxury
+              </span>
+              <span className="text-2xl font-playfair font-bold text-gold">
+                Haven
+              </span>
             </div>
           </Link>
 
@@ -117,7 +135,9 @@ const Navbar = ({ cartItems = 3 }) => {
                 to={item.path}
                 className={({ isActive }) =>
                   `font-medium transition-colors py-2 ${
-                    isActive ? 'text-gold border-b-2 border-gold' : 'text-gray-700 hover:text-gold'
+                    isActive
+                      ? "text-gold border-b-2 border-gold"
+                      : "text-gray-700 hover:text-gold"
                   }`
                 }
                 onClick={closeAllMenus}
@@ -125,7 +145,7 @@ const Navbar = ({ cartItems = 3 }) => {
                 {item.name}
               </NavLink>
             ))}
-            
+
             {/* Category Dropdown */}
             <div className="relative" ref={categoryRef}>
               <button
@@ -133,9 +153,13 @@ const Navbar = ({ cartItems = 3 }) => {
                 className="flex items-center font-medium text-gray-700 hover:text-gold transition-colors py-2"
               >
                 Category
-                <ChevronDown className={`ml-1 w-4 h-4 transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown
+                  className={`ml-1 w-4 h-4 transition-transform duration-200 ${
+                    isCategoryOpen ? "rotate-180" : ""
+                  }`}
+                />
               </button>
-              
+
               {/* Category Dropdown Menu */}
               {isCategoryOpen && (
                 <div className="absolute left-0 mt-2 w-56 bg-white shadow-xl rounded-lg border border-gray-100 z-50">
@@ -146,15 +170,23 @@ const Navbar = ({ cartItems = 3 }) => {
                           onClick={(e) => handleSubmenuToggle(category.name, e)}
                           className="flex items-center justify-between w-full px-4 py-3 rounded-lg hover:bg-gray-50 transition text-left"
                         >
-                          <span className="font-medium text-gray-700">{category.name}</span>
-                          <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${openSubmenu === category.name ? 'rotate-90' : ''}`} />
+                          <span className="font-medium text-gray-700">
+                            {category.name}
+                          </span>
+                          <ChevronRight
+                            className={`w-4 h-4 transition-transform duration-200 ${
+                              openSubmenu === category.name ? "rotate-90" : ""
+                            }`}
+                          />
                         </button>
-                        
+
                         {/* Submenu - Fixed position */}
                         {openSubmenu === category.name && (
                           <div className="absolute left-full top-0 ml-1 w-56 bg-white shadow-xl rounded-lg border border-gray-100 z-50">
                             <div className="p-3">
-                              <div className="text-sm font-semibold text-gray-500 mb-2 px-2">{category.name}</div>
+                              <div className="text-sm font-semibold text-gray-500 mb-2 px-2">
+                                {category.name}
+                              </div>
                               <div className="space-y-1">
                                 {category.submenu.map((subItem) => (
                                   <Link
@@ -188,21 +220,25 @@ const Navbar = ({ cartItems = 3 }) => {
               />
               <Search className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
             </div>
-            
-            <Link to="/wishlist" className="relative group" onClick={closeAllMenus}>
+
+            <Link
+              to="/wishlist"
+              className="relative group"
+              onClick={closeAllMenus}
+            >
               <Heart className="w-6 h-6 text-gray-700 group-hover:text-red-500 transition-colors" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 3
               </span>
             </Link>
-            
+
             <Link to="/cart" className="relative group" onClick={closeAllMenus}>
               <ShoppingCart className="w-6 h-6 text-gray-700 group-hover:text-gold transition-colors" />
               <span className="absolute -top-2 -right-2  text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
                 {cartItems}
               </span>
             </Link>
-            
+
             <Link to="/account" onClick={closeAllMenus}>
               <User className="w-6 h-6 text-gray-700 hover:text-gold transition-colors" />
             </Link>
@@ -212,7 +248,11 @@ const Navbar = ({ cartItems = 3 }) => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="lg:hidden p-2 rounded-md text-gray-700"
             >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
@@ -229,14 +269,16 @@ const Navbar = ({ cartItems = 3 }) => {
                   onClick={handleMobileLinkClick}
                   className={({ isActive }) =>
                     `block py-3 px-4 font-medium rounded-lg ${
-                      isActive ? 'text-gold bg-gold bg-opacity-10' : 'text-gray-700 hover:text-gold hover:bg-gray-50'
+                      isActive
+                        ? "text-gold bg-gold bg-opacity-10"
+                        : "text-gray-700 hover:text-gold hover:bg-gray-50"
                     }`
                   }
                 >
                   {item.name}
                 </NavLink>
               ))}
-              
+
               {/* Mobile Category Dropdown */}
               <div>
                 <button
@@ -244,9 +286,13 @@ const Navbar = ({ cartItems = 3 }) => {
                   className="flex items-center justify-between w-full py-3 px-4 font-medium text-gray-700 hover:text-gold hover:bg-gray-50 rounded-lg"
                 >
                   <span>Category</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isCategoryOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      isCategoryOpen ? "rotate-180" : ""
+                    }`}
+                  />
                 </button>
-                
+
                 {/* Mobile Category Menu */}
                 {isCategoryOpen && (
                   <div className="pl-6 mt-1 space-y-1">
@@ -259,9 +305,13 @@ const Navbar = ({ cartItems = 3 }) => {
                           <div className="flex items-center">
                             {category.name}
                           </div>
-                          <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${openSubmenu === category.name ? 'rotate-90' : ''}`} />
+                          <ChevronRight
+                            className={`w-4 h-4 transition-transform duration-200 ${
+                              openSubmenu === category.name ? "rotate-90" : ""
+                            }`}
+                          />
                         </button>
-                        
+
                         {/* Mobile Submenu */}
                         {openSubmenu === category.name && (
                           <div className="pl-6 mt-1 space-y-1">
@@ -282,7 +332,7 @@ const Navbar = ({ cartItems = 3 }) => {
                   </div>
                 )}
               </div>
-              
+
               {/* Mobile Search */}
               <div className="relative mt-4 px-4">
                 <input
