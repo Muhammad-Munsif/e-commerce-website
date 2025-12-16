@@ -180,7 +180,7 @@ const ProductCard = ({ product }) => {
               >
                 <Minus className="w-4 h-4" />
               </button>
-              <span className="px-4 py-2 font-medium min-w-[50px] text-center border-x border-gray-300">
+              <span className="px-4 py-2 font-medium min-w-[30px] text-center border-x border-gray-300">
                 {quantity}
               </span>
               <button
@@ -194,7 +194,7 @@ const ProductCard = ({ product }) => {
             {/* Add to Cart Button */}
             <button
               onClick={handleAddToCart}
-              className="flex-1 flex items-center justify-center  py-2.5 px-4 rounded-lg  transition-colors font-medium"
+              className="flex-1 flex items-center justify-center text-nowrap border-1 border-gray-300 py-2.5 px-4 rounded-lg  transition-colors font-medium"
             >
               {/* <ShoppingCart className="w-5 h-5 mr-2" /> */}
               Add to Cart

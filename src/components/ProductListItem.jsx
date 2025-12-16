@@ -1,3 +1,4 @@
+import { Minus, Plus, ShoppingCart, Star } from "lucide-react";
 import { useState } from "react";
 
 const ProductListItem = ({ product }) => {
@@ -130,7 +131,7 @@ const ProductListItem = ({ product }) => {
 
             {/* Total Price Display */}
             {quantity > 1 && (
-              <div className="ml-6 pl-6 border-l">
+              <div className="ml-6 px-6 border-l">
                 <div className="text-xs text-gray-500">Total Price:</div>
                 <div className="text-lg font-bold text-gold">
                   ${calculateTotalPrice()}
@@ -141,10 +142,10 @@ const ProductListItem = ({ product }) => {
 
           {/* Action Buttons */}
           <div className="flex space-x-3">
-            <button className="border border-gold text-gold px-6 py-2 rounded-lg hover:bg-gold hover:text-white transition-colors font-medium">
+            <button className="border border-gold text-nowrap ml-3 px-4 py-2 rounded-lg hover:bg-gold transition-colors font-medium">
               Add to Wishlist
             </button>
-            <button className="flex items-center bg-gold text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition-colors font-medium">
+            <button className="flex items-center bg-gold text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors font-medium">
               <ShoppingCart className="w-5 h-5 mr-2" />
               Add to Cart ({quantity})
             </button>
