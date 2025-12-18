@@ -1,27 +1,27 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { CartProvider } from './context/CartContext';
-import { WishlistProvider } from './context/WishlistContext';
-import { AuthProvider } from './context/AuthContext';
-import { ThemeProvider } from './context/ThemeContext';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import LoadingSpinner from './components/LoadingSpinner';
+import React, { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { CartProvider } from "./context/CartContext";
+import { WishlistProvider } from "./context/WishlistContext";
+import { AuthProvider } from "./context/AuthContext";
+import { ThemeProvider } from "./context/ThemeContext";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 // Lazy load pages for better performance
-const Home = lazy(() => import('./pages/Home'));
-const About = lazy(() => import('./pages/About'));
-const Shop = lazy(() => import('./pages/Shop'));
-const Categories = lazy(() => import('./pages/Categories'));
-const ProductDetail = lazy(() => import('./pages/ProductDetail'));
-const Contact = lazy(() => import('./pages/Contact'));
-const Cart = lazy(() => import('./pages/Cart'));
-const Checkout = lazy(() => import('./pages/Checkout'));
-const Wishlist = lazy(() => import('./pages/Wishlist'));
-const Account = lazy(() => import('./pages/Account'));
-const OrderTracking = lazy(() => import('./pages/OrderTracking'));
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Shop = lazy(() => import("./pages/Shop"));
+const Categories = lazy(() => import("./pages/Categories"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const Wishlist = lazy(() => import("./pages/Wishlist"));
+const Account = lazy(() => import("./pages/Account"));
+const OrderTracking = lazy(() => import("./pages/OrderTracking"));
 
 const App = () => {
   return (
@@ -38,8 +38,14 @@ const App = () => {
                       <Route path="/" element={<Home />} />
                       <Route path="/about" element={<About />} />
                       <Route path="/shop" element={<Shop />} />
-                      <Route path="/category/:category" element={<Categories />} />
-                      <Route path="/category/:category/:subcategory" element={<Categories />} />
+                      <Route
+                        path="/category/:category"
+                        element={<Categories />}
+                      />
+                      <Route
+                        path="/category/:category/:subcategory"
+                        element={<Categories />}
+                      />
                       <Route path="/contact" element={<Contact />} />
                       <Route path="/product/:id" element={<ProductDetail />} />
                       <Route path="/cart" element={<Cart />} />
@@ -47,8 +53,11 @@ const App = () => {
                       <Route path="/wishlist" element={<Wishlist />} />
                       <Route path="/account" element={<Account />} />
                       <Route path="/orders" element={<OrderTracking />} />
-                      <Route path="/orders/:orderId" element={<OrderTracking />} />
-                      
+                      <Route
+                        path="/orders/:orderId"
+                        element={<OrderTracking />}
+                      />
+
                       {/* 404 Page */}
                       <Route
                         path="*"
@@ -58,9 +67,12 @@ const App = () => {
                               <div className="text-9xl font-playfair font-bold text-gold mb-4 animate-bounce">
                                 404
                               </div>
-                              <h1 className="text-3xl font-bold mb-4">Page Not Found</h1>
+                              <h1 className="text-3xl font-bold mb-4">
+                                Page Not Found
+                              </h1>
                               <p className="text-gray-600 dark:text-gray-300 mb-8">
-                                The page you're looking for doesn't exist or has been moved.
+                                The page you're looking for doesn't exist or has
+                                been moved.
                               </p>
                               <a
                                 href="/"
@@ -98,7 +110,6 @@ const App = () => {
 };
 
 export default App;
-
 
 // import React from "react";
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -894,8 +905,6 @@ export default App;
 
 // export default Layout;
 
-
-
 // import React from "react";
 // import { Award, Users, Globe, Heart, Sparkles } from "lucide-react";
 
@@ -1026,11 +1035,8 @@ export default App;
 // import { ChevronRight, Star } from 'lucide-react';
 // import { categoryData } from '../data/data';
 
-
 // const Categories = () => {
 //   const { category, subcategory } = useParams();
-
-  
 
 //   const currentCategory = categoryData[category] || categoryData.jewelry;
 //   const currentSubcategory = subcategory ? currentCategory.subcategories[subcategory] : null;
@@ -1526,7 +1532,7 @@ export default App;
 //       <section className="py-16">
 //         <div className="container mx-auto px-4">
 //           <h2 className="text-3xl font-playfair font-bold text-center mb-12">Explore Our Collections</h2>
-          
+
 //           {/* Jewelry Banner - Rings & Pendants */}
 //           <div className="mb-12">
 //             <div className="bg-gradient-to-r from-gold/10 to-bronze/20 rounded-3xl overflow-hidden">
@@ -1539,7 +1545,7 @@ export default App;
 //                     <h3 className="text-3xl font-playfair font-bold">Jewelry Collection</h3>
 //                   </div>
 //                   <p className="text-gray-600 mb-6">
-//                     Discover timeless elegance with our exquisite rings and pendants. 
+//                     Discover timeless elegance with our exquisite rings and pendants.
 //                     Crafted with precision and passion, each piece tells a story of luxury.
 //                   </p>
 //                   <div className="flex flex-wrap gap-4 mb-8">
@@ -1596,7 +1602,7 @@ export default App;
 //                     <h3 className="text-3xl font-playfair font-bold">Premium Wallets</h3>
 //                   </div>
 //                   <p className="text-gray-300 mb-6">
-//                     Elevate your everyday essentials with our collection of premium wallets. 
+//                     Elevate your everyday essentials with our collection of premium wallets.
 //                     From classic leather to modern RFID protection, find your perfect companion.
 //                   </p>
 //                   <div className="flex flex-wrap gap-4 mb-8">
@@ -1642,7 +1648,7 @@ export default App;
 //                     <h3 className="text-3xl font-playfair font-bold">Signature Scents</h3>
 //                   </div>
 //                   <p className="text-gray-600 mb-6">
-//                     Experience luxury in every breath with our exclusive perfume collection. 
+//                     Experience luxury in every breath with our exclusive perfume collection.
 //                     7 distinct scent families, each telling a unique olfactory story.
 //                   </p>
 //                   <div className="flex flex-wrap gap-4 mb-8">
