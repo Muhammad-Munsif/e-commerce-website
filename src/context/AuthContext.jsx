@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -8,9 +8,9 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    const savedToken = localStorage.getItem('token');
-    
+    const savedUser = localStorage.getItem("user");
+    const savedToken = localStorage.getItem("token");
+
     if (savedUser && savedToken) {
       setUser(JSON.parse(savedUser));
     }
@@ -22,20 +22,21 @@ export const AuthProvider = ({ children }) => {
       // Simulate API call
       const mockUser = {
         id: 1,
-        name: 'John Doe',
+        name: "John Doe",
         email: email,
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-        role: 'customer'
+        avatar:
+          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+        role: "customer",
       };
-      
+
       setUser(mockUser);
-      localStorage.setItem('user', JSON.stringify(mockUser));
-      localStorage.setItem('token', 'mock-jwt-token');
-      
-      toast.success('Login successful!');
+      localStorage.setItem("user", JSON.stringify(mockUser));
+      localStorage.setItem("token", "mock-jwt-token");
+
+      toast.success("Login successful!");
       return { success: true, user: mockUser };
     } catch (error) {
-      toast.error('Login failed. Please try again.');
+      toast.error("Login failed. Please try again.");
       return { success: false, error: error.message };
     }
   };
@@ -45,34 +46,35 @@ export const AuthProvider = ({ children }) => {
       const newUser = {
         id: Date.now(),
         ...userData,
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-        role: 'customer'
+        avatar:
+          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+        role: "customer",
       };
-      
+
       setUser(newUser);
-      localStorage.setItem('user', JSON.stringify(newUser));
-      localStorage.setItem('token', 'mock-jwt-token');
-      
-      toast.success('Registration successful!');
+      localStorage.setItem("user", JSON.stringify(newUser));
+      localStorage.setItem("token", "mock-jwt-token");
+
+      toast.success("Registration successful!");
       return { success: true, user: newUser };
     } catch (error) {
-      toast.error('Registration failed. Please try again.');
+      toast.error("Registration failed. Please try again.");
       return { success: false, error: error.message };
     }
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    toast.info('Logged out successfully');
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    toast.info("Logged out successfully");
   };
 
   const updateProfile = (updatedData) => {
     const updatedUser = { ...user, ...updatedData };
     setUser(updatedUser);
-    localStorage.setItem('user', JSON.stringify(updatedUser));
-    toast.success('Profile updated successfully!');
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    toast.success("Profile updated successfully!");
   };
 
   return (
@@ -83,7 +85,7 @@ export const AuthProvider = ({ children }) => {
         login,
         register,
         logout,
-        updateProfile
+        updateProfile,
       }}
     >
       {children}
