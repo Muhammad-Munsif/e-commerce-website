@@ -1,213 +1,79 @@
-import React, { createContext, useContext, useReducer, useState, useEffect } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { CartProvider } from './context/CartContext';
+import { WishlistProvider } from './context/WishlistContext';
+import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import About from './pages/About';
-import Shop from './pages/Shop';
-import Categories from './pages/Categories';
-import Contact from './pages/Contact';
-import ProductDetail from './pages/ProductDetail';
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import Wishlist from './pages/Wishlist';
-import Account from './pages/Account';
-import OrderTracking from './pages/OrderTracking';
 import LoadingSpinner from './components/LoadingSpinner';
 
-// Create Contexts
-export const CartContext = createContext();
-export const WishlistContext = createContext();
-export const AuthContext = createContext();
-export const ThemeContext = createContext();
-
-// Cart Reducer
-const cartReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD_TO_CART':
-      const existingItem = state.items.find(item => item.id === action.payload.id);
-      if (existingItem) {
-        toast.info(`Updated quantity for ${action.payload.name}`);
-        return {
-          ...state,
-          items: state.items.map(item =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + action.payload.quantity }
-              : item
-          ),
-        };
-      }
-      toast.success(`${action.payload.name} added to cart!`);
-      return {
-        ...state,
-        items: [...state.items, action.payload],
-      };
-
-    case 'REMOVE_FROM_CART':
-      toast.warning(`${action.payload.name} removed from cart`);
-      return {
-        ...state,
-        items: state.items.filter(item => item.id !== action.payload.id),
-      };
-
-    case 'UPDATE_QUANTITY':
-      return {
-        ...state,
-        items: state.items.map(item =>
-          item.id === action.payload.id
-            ? { ...item, quantity: Math.max(1, action.payload.quantity) }
-            : item
-        ),
-      };
-
-    case 'CLEAR_CART':
-      toast.info('Cart cleared successfully');
-      return { ...state, items: [] };
-
-    case 'LOAD_CART':
-      return { ...state, items: action.payload };
-
-    default:
-      return state;
-  }
-};
-
-// Wishlist Reducer
-const wishlistReducer = (state, action) => {
-  switch (action.type) {
-    case 'TOGGLE_WISHLIST':
-      const exists = state.items.some(item => item.id === action.payload.id);
-      if (exists) {
-        toast.info(`${action.payload.name} removed from wishlist`);
-        return {
-          ...state,
-          items: state.items.filter(item => item.id !== action.payload.id),
-        };
-      }
-      toast.success(`${action.payload.name} added to wishlist!`);
-      return {
-        ...state,
-        items: [...state.items, action.payload],
-      };
-
-    case 'LOAD_WISHLIST':
-      return { ...state, items: action.payload };
-
-    default:
-      return state;
-  }
-};
+// Lazy load pages for better performance
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const Shop = lazy(() => import('./pages/Shop'));
+const Categories = lazy(() => import('./pages/Categories'));
+const ProductDetail = lazy(() => import('./pages/ProductDetail'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Cart = lazy(() => import('./pages/Cart'));
+const Checkout = lazy(() => import('./pages/Checkout'));
+const Wishlist = lazy(() => import('./pages/Wishlist'));
+const Account = lazy(() => import('./pages/Account'));
+const OrderTracking = lazy(() => import('./pages/OrderTracking'));
 
 const App = () => {
-  const [cart, cartDispatch] = useReducer(cartReducer, { items: [] });
-  const [wishlist, wishlistDispatch] = useReducer(wishlistReducer, { items: [] });
-  const [user, setUser] = useState(null);
-  const [theme, setTheme] = useState('light');
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Load cart and wishlist from localStorage on mount
-  useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
-    const savedWishlist = localStorage.getItem('wishlist');
-    const savedUser = localStorage.getItem('user');
-    const savedTheme = localStorage.getItem('theme') || 'light';
-
-    if (savedCart) {
-      cartDispatch({ type: 'LOAD_CART', payload: JSON.parse(savedCart) });
-    }
-    if (savedWishlist) {
-      wishlistDispatch({ type: 'LOAD_WISHLIST', payload: JSON.parse(savedWishlist) });
-    }
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-    setTheme(savedTheme);
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-  }, []);
-
-  // Save to localStorage whenever cart/wishlist changes
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart.items));
-    localStorage.setItem('wishlist', JSON.stringify(wishlist.items));
-    localStorage.setItem('theme', theme);
-  }, [cart.items, wishlist.items, theme]);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    document.documentElement.classList.toggle('dark');
-    toast.info(`${newTheme === 'dark' ? 'Dark' : 'Light'} mode enabled`);
-  };
-
-  const login = (userData) => {
-    setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
-    toast.success(`Welcome back, ${userData.name}!`);
-  };
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
-    toast.info('Logged out successfully');
-  };
-
-  const cartTotal = cart.items.reduce((total, item) => {
-    const price = item.discount ? item.price * (1 - item.discount / 100) : item.price;
-    return total + price * item.quantity;
-  }, 0);
-
-  const cartCount = cart.items.reduce((count, item) => count + item.quantity, 0);
-
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <AuthContext.Provider value={{ user, login, logout, isLoading, setIsLoading }}>
-        <CartContext.Provider value={{ cart, cartDispatch, cartTotal, cartCount }}>
-          <WishlistContext.Provider value={{ wishlist, wishlistDispatch }}>
+    <ThemeProvider>
+      <AuthProvider>
+        <CartProvider>
+          <WishlistProvider>
             <Router>
-              <div className={`min-h-screen flex flex-col transition-colors duration-300 ${theme === 'dark' ? 'dark:bg-gray-900 dark:text-white' : ''}`}>
-                {isLoading && <LoadingSpinner />}
+              <div className="min-h-screen flex flex-col">
                 <Navbar />
                 <main className="flex-grow">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/shop" element={<Shop />} />
-                    <Route path="/category/:category" element={<Categories />} />
-                    <Route path="/category/:category/:subcategory" element={<Categories />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/product/:id" element={<ProductDetail />} />
-                    <Route path="/cart" element={<Cart />} />
-                    <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/wishlist" element={<Wishlist />} />
-                    <Route path="/account" element={<Account />} />
-                    <Route path="/track-order" element={<OrderTracking />} />
-
-                    {/* 404 Page */}
-                    <Route
-                      path="*"
-                      element={
-                        <div className="min-h-[70vh] flex items-center justify-center px-4">
-                          <div className="text-center max-w-md">
-                            <div className="text-9xl font-playfair font-bold text-gold mb-4 animate-bounce">
-                              404
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/about" element={<About />} />
+                      <Route path="/shop" element={<Shop />} />
+                      <Route path="/category/:category" element={<Categories />} />
+                      <Route path="/category/:category/:subcategory" element={<Categories />} />
+                      <Route path="/contact" element={<Contact />} />
+                      <Route path="/product/:id" element={<ProductDetail />} />
+                      <Route path="/cart" element={<Cart />} />
+                      <Route path="/checkout" element={<Checkout />} />
+                      <Route path="/wishlist" element={<Wishlist />} />
+                      <Route path="/account" element={<Account />} />
+                      <Route path="/orders" element={<OrderTracking />} />
+                      <Route path="/orders/:orderId" element={<OrderTracking />} />
+                      
+                      {/* 404 Page */}
+                      <Route
+                        path="*"
+                        element={
+                          <div className="min-h-[70vh] flex items-center justify-center px-4">
+                            <div className="text-center max-w-md">
+                              <div className="text-9xl font-playfair font-bold text-gold mb-4 animate-bounce">
+                                404
+                              </div>
+                              <h1 className="text-3xl font-bold mb-4">Page Not Found</h1>
+                              <p className="text-gray-600 dark:text-gray-300 mb-8">
+                                The page you're looking for doesn't exist or has been moved.
+                              </p>
+                              <a
+                                href="/"
+                                className="inline-block bg-gold text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition-all duration-300 transform hover:-translate-y-1 font-medium shadow-lg hover:shadow-xl"
+                              >
+                                Return Home
+                              </a>
                             </div>
-                            <h1 className="text-3xl font-bold mb-4 dark:text-white">Page Not Found</h1>
-                            <p className="text-gray-600 dark:text-gray-300 mb-8">
-                              The page you're looking for doesn't exist or has been moved.
-                            </p>
-                            <a
-                              href="/"
-                              className="inline-block bg-gold text-white px-6 py-3 rounded-lg hover:bg-yellow-600 transition-all duration-300 transform hover:-translate-y-1 font-medium shadow-lg hover:shadow-xl"
-                            >
-                              Return Home
-                            </a>
                           </div>
-                        </div>
-                      }
-                    />
-                  </Routes>
+                        }
+                      />
+                    </Routes>
+                  </Suspense>
                 </main>
                 <Footer />
                 <ToastContainer
@@ -220,14 +86,14 @@ const App = () => {
                   pauseOnFocusLoss
                   draggable
                   pauseOnHover
-                  theme={theme}
+                  theme="light"
                 />
               </div>
             </Router>
-          </WishlistContext.Provider>
-        </CartContext.Provider>
-      </AuthContext.Provider>
-    </ThemeContext.Provider>
+          </WishlistProvider>
+        </CartProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

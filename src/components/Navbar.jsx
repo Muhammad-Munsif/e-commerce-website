@@ -1,4 +1,23 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+// import React, { useState, useEffect, useRef, useContext } from "react";
+// import { Link, NavLink, useNavigate } from "react-router-dom";
+// import {
+//   Menu,
+//   X,
+//   Search,
+//   User,
+//   Heart,
+//   ChevronDown,
+//   ChevronRight,
+//   ShoppingCart,
+//   Sun,
+//   Moon,
+//   LogOut,
+//   UserCircle,
+// } from "lucide-react";
+// import { CartContext, WishlistContext, AuthContext, ThemeContext } from "../App";
+
+// const Navbar = () => {
+  import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   Menu,
@@ -14,7 +33,10 @@ import {
   LogOut,
   UserCircle,
 } from "lucide-react";
-import { CartContext, WishlistContext, AuthContext, ThemeContext } from "./App";
+import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext";
+import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
