@@ -14,31 +14,36 @@ import {
   LogOut,
   UserCircle,
 } from "lucide-react";
-import { CartContext, WishlistContext, AuthContext, ThemeContext } from "../App";
+import {
+  CartContext,
+  WishlistContext,
+  AuthContext,
+  ThemeContext,
+} from "../App";
 
 const Navbar = () => {
-//   import React, { useState, useEffect, useRef, useContext } from "react";
-// import { Link, NavLink, useNavigate } from "react-router-dom";
-// import {
-//   Menu,
-//   X,
-//   Search,
-//   User,
-//   Heart,
-//   ChevronDown,
-//   ChevronRight,
-//   ShoppingCart,
-//   Sun,
-//   Moon,
-//   LogOut,
-//   UserCircle,
-// } from "lucide-react";
-// import { useCart } from "../context/CartContext";
-// import { useWishlist } from "../context/WishlistContext";
-// import { useAuth } from "../context/AuthContext";
-// import { useTheme } from "../context/ThemeContext";
+  //   import React, { useState, useEffect, useRef, useContext } from "react";
+  // import { Link, NavLink, useNavigate } from "react-router-dom";
+  // import {
+  //   Menu,
+  //   X,
+  //   Search,
+  //   User,
+  //   Heart,
+  //   ChevronDown,
+  //   ChevronRight,
+  //   ShoppingCart,
+  //   Sun,
+  //   Moon,
+  //   LogOut,
+  //   UserCircle,
+  // } from "lucide-react";
+  // import { useCart } from "../context/CartContext";
+  // import { useWishlist } from "../context/WishlistContext";
+  // import { useAuth } from "../context/AuthContext";
+  // import { useTheme } from "../context/ThemeContext";
 
-// const Navbar = () => {
+  // const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [openSubmenu, setOpenSubmenu] = useState(null);
@@ -141,9 +146,11 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`sticky top-0 z-50 shadow-lg transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
-    }`}>
+    <nav
+      className={`sticky top-0 z-50 shadow-lg transition-colors duration-300 ${
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      }`}
+    >
       <div className="container mx-auto px-4">
         {/* Top Bar */}
         <div className="hidden md:flex justify-between items-center py-2 text-sm border-b dark:border-gray-700">
@@ -152,18 +159,30 @@ const Navbar = () => {
             <span>🚚 Free Shipping over $100</span>
           </div>
           <div className="flex items-center space-x-4">
-            <button onClick={toggleTheme} className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            <button
+              onClick={toggleTheme}
+              className="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              {theme === "dark" ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
             </button>
             {user ? (
               <>
                 <span>Welcome, {user.name}</span>
-                <button onClick={logout} className="flex items-center hover:text-gold">
+                <button
+                  onClick={logout}
+                  className="flex items-center hover:text-gold"
+                >
                   <LogOut className="w-4 h-4 mr-1" /> Logout
                 </button>
               </>
             ) : (
-              <Link to="/account" className="hover:text-gold">Login / Register</Link>
+              <Link to="/account" className="hover:text-gold">
+                Login / Register
+              </Link>
             )}
           </div>
         </div>
@@ -171,7 +190,11 @@ const Navbar = () => {
         {/* Main Nav */}
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2" onClick={closeAllMenus}>
+          <Link
+            to="/"
+            className="flex items-center space-x-2"
+            onClick={closeAllMenus}
+          >
             <div className="relative">
               <div className="w-10 h-10 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center animate-pulse">
                 <ShoppingCart className="w-6 h-6 text-white" />
@@ -179,7 +202,9 @@ const Navbar = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-playfair font-bold">Luxury</span>
-              <span className="text-xl font-playfair font-bold text-gold">Haven</span>
+              <span className="text-xl font-playfair font-bold text-gold">
+                Haven
+              </span>
             </div>
           </Link>
 
@@ -191,17 +216,17 @@ const Navbar = () => {
                 to={item.path}
                 className={({ isActive }) =>
                   `font-medium transition-all duration-300 py-2 relative group ${
-                    isActive
-                      ? "text-gold"
-                      : "hover:text-gold"
+                    isActive ? "text-gold" : "hover:text-gold"
                   }`
                 }
                 onClick={closeAllMenus}
               >
                 {item.name}
-                <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-gold transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 ${
-                  isActive ? 'scale-x-100' : ''
-                }`}></span>
+                <span
+                  className={`absolute bottom-0 left-0 w-full h-0.5 bg-gold transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 ${
+                    isActive ? "scale-x-100" : ""
+                  }`}
+                ></span>
               </NavLink>
             ))}
 
