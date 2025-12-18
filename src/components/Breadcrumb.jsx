@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
 
 const Breadcrumb = ({ items }) => {
   return (
@@ -9,13 +9,15 @@ const Breadcrumb = ({ items }) => {
         <nav className="flex items-center text-sm">
           {items.map((item, index) => (
             <React.Fragment key={index}>
-              {index > 0 && <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />}
+              {index > 0 && (
+                <ChevronRight className="w-4 h-4 mx-2 text-gray-400" />
+              )}
               <Link
                 to={item.path}
                 className={`${
                   index === items.length - 1
-                    ? 'text-gray-900 dark:text-white font-medium'
-                    : 'text-gray-600 dark:text-gray-400 hover:text-gold transition-colors'
+                    ? "text-gray-900 dark:text-white font-medium"
+                    : "text-gray-600 dark:text-gray-400 hover:text-gold transition-colors"
                 }`}
               >
                 {item.label}
