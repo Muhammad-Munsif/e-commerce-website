@@ -775,3 +775,483 @@ const Navbar = ({ cartItems = 3 }) => {
 };
 
 export default Navbar;
+
+import React from "react";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+
+const Layout = ({ children }) => {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-grow">{children}</main>
+      <Footer />
+    </div>
+  );
+};
+
+export default Layout;
+
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Youtube,
+  Mail,
+  Phone,
+  MapPin,
+  CreditCard,
+} from "lucide-react";
+
+const Footer = () => {
+  const categories = [
+    { name: "Rings", path: "/category/jewelry/rings" },
+    { name: "Pendants", path: "/category/jewelry/pendants" },
+    { name: "Leather Wallets", path: "/category/wallets/leather" },
+    { name: "Floral Perfumes", path: "/category/perfumes/floral" },
+    { name: "Designer Wallets", path: "/category/wallets/designer" },
+    { name: "Woody Perfumes", path: "/category/perfumes/woody" },
+  ];
+
+  const perfumes = [
+    "Floral Scents",
+    "Woody Scents",
+    "Fresh Scents",
+    "Oriental Scents",
+    "Citrus Scents",
+    "Gourmand Scents",
+    "Aquatic Scents",
+  ];
+
+  return (
+    <footer className="bg-gray-900 text-white">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div>
+            <div className="flex items-center mb-6">
+              <div className="w-12 h-12 bg-gradient-to-r from-gold to-bronze rounded-full flex items-center justify-center mr-3">
+                <CreditCard className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <span className="text-2xl font-playfair font-bold">Luxury</span>
+                <span className="text-2xl font-playfair font-bold text-gold">
+                  Haven
+                </span>
+              </div>
+            </div>
+            <p className="text-gray-400 mb-6">
+              Premium jewelry, luxury wallets, and exquisite perfumes.
+              Experience elegance redefined.
+            </p>
+            <div className="flex space-x-4">
+              <a
+                href="#"
+                className="bg-gray-800 p-2 rounded-full hover:bg-gold transition"
+              >
+                <Facebook className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                className="bg-gray-800 p-2 rounded-full hover:bg-gold transition"
+              >
+                <Instagram className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                className="bg-gray-800 p-2 rounded-full hover:bg-gold transition"
+              >
+                <Twitter className="w-5 h-5" />
+              </a>
+              <a
+                href="#"
+                className="bg-gray-800 p-2 rounded-full hover:bg-gold transition"
+              >
+                <Youtube className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-800">
+              Shop Categories
+            </h3>
+            <ul className="space-y-3">
+              {categories.map((category) => (
+                <li key={category.name}>
+                  <Link
+                    to={category.path}
+                    className="text-gray-400 hover:text-gold transition"
+                  >
+                    {category.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Perfume Scents */}
+          <div>
+            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-800">
+              Perfume Scents
+            </h3>
+            <ul className="space-y-3">
+              {perfumes.map((scent) => (
+                <li key={scent}>
+                  <Link
+                    to={`/category/perfumes/${scent
+                      .toLowerCase()
+                      .replace(" ", "-")}`}
+                    className="text-gray-400 hover:text-gold transition"
+                  >
+                    {scent}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-lg font-semibold mb-6 pb-2 border-b border-gray-800">
+              Contact Us
+            </h3>
+            <div className="space-y-4">
+              <div className="flex items-center">
+                <Phone className="w-5 h-5 text-gold mr-3" />
+                <div>
+                  <p className="font-medium">+1 (555) 123-4567</p>
+                  <p className="text-sm text-gray-400">Mon-Fri 9am-6pm</p>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <Mail className="w-5 h-5 text-gold mr-3" />
+                <div>
+                  <p className="font-medium">support@luxuryhaven.com</p>
+                  <p className="text-sm text-gray-400">24/7 Support</p>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <MapPin className="w-5 h-5 text-gold mr-3" />
+                <div>
+                  <p className="font-medium">123 Luxury Avenue</p>
+                  <p className="text-sm text-gray-400">New York, NY 10001</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Newsletter */}
+            <div className="mt-8">
+              <h4 className="font-semibold mb-3">Newsletter</h4>
+              <div className="flex">
+                <input
+                  type="email"
+                  placeholder="Your email"
+                  className="flex-1 px-4 py-2 rounded-l-lg text-gray-900"
+                />
+                <button className="bg-gold px-4 py-2 rounded-r-lg hover:bg-yellow-600 transition">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p>
+              &copy; {new Date().getFullYear()} Luxury Haven. All rights
+              reserved.
+            </p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <Link to="/privacy" className="hover:text-white">
+                Privacy Policy
+              </Link>
+              <Link to="/terms" className="hover:text-white">
+                Terms of Service
+              </Link>
+              <Link to="/shipping" className="hover:text-white">
+                Shipping Policy
+              </Link>
+              <Link to="/returns" className="hover:text-white">
+                Return Policy
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+
+import React from "react";
+import { Award, Users, Globe, Heart, Sparkles } from "lucide-react";
+
+const About = () => {
+  const values = [
+    {
+      icon: <Award className="w-8 h-8" />,
+      title: "Quality First",
+      description: "Only premium materials and craftsmanship",
+    },
+    {
+      icon: <Heart className="w-8 h-8" />,
+      title: "Customer Love",
+      description: "Your satisfaction is our priority",
+    },
+    {
+      icon: <Sparkles className="w-8 h-8" />,
+      title: "Excellence",
+      description: "Striving for perfection in every detail",
+    },
+    {
+      icon: <Globe className="w-8 h-8" />,
+      title: "Global Standards",
+      description: "World-class products and service",
+    },
+  ];
+
+  return (
+    <div className="py-12">
+      <div className="container mx-auto px-4">
+        {/* Hero */}
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-6">
+            About <span className="text-gold">Luxury Haven</span>
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Where elegance meets excellence. We curate the finest jewelry,
+            wallets, and perfumes for the discerning customer.
+          </p>
+        </div>
+
+        {/* Story */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+          <div>
+            <h2 className="text-3xl font-playfair font-bold mb-6">Our Story</h2>
+            <p className="text-gray-600 mb-4">
+              Founded in 2010, Luxury Haven began as a small boutique dedicated
+              to bringing exceptional quality jewelry to our community. What
+              started with a passion for exquisite craftsmanship has grown into
+              a premier destination for luxury accessories.
+            </p>
+            <p className="text-gray-600 mb-4">
+              Today, we've expanded our collection to include premium wallets
+              and an exclusive line of perfumes, each carefully selected to
+              embody sophistication and quality.
+            </p>
+            <p className="text-gray-600">
+              Every piece in our collection tells a story - of tradition,
+              innovation, and timeless elegance.
+            </p>
+          </div>
+          <div className="relative">
+            <img
+              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop"
+              alt="Our Store"
+              className="rounded-lg shadow-2xl"
+            />
+            <div className="absolute -bottom-6 -right-6 bg-gold text-white p-6 rounded-lg shadow-xl">
+              <div className="text-3xl font-bold">13+</div>
+              <div className="text-sm">Years of Excellence</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Values */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-playfair font-bold text-center mb-12">
+            Our Values
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <div
+                key={index}
+                className="text-center p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition"
+              >
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gold text-white rounded-full mb-4">
+                  {value.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
+                <p className="text-gray-600">{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Collections */}
+        <div className="bg-gradient-to-r from-gray-50 to-gold/10 rounded-2xl p-12">
+          <h2 className="text-3xl font-playfair font-bold text-center mb-8">
+            Our Collections
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="text-5xl font-bold text-gold mb-2">500+</div>
+              <div className="text-xl font-semibold">Jewelry Pieces</div>
+              <p className="text-gray-600 mt-2">Rings, pendants & more</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold text-gold mb-2">200+</div>
+              <div className="text-xl font-semibold">Wallets</div>
+              <p className="text-gray-600 mt-2">Leather & designer</p>
+            </div>
+            <div className="text-center">
+              <div className="text-5xl font-bold text-gold mb-2">7</div>
+              <div className="text-xl font-semibold">Perfume Scents</div>
+              <p className="text-gray-600 mt-2">Exclusive collections</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default About;
+
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { ChevronRight, Star } from 'lucide-react';
+import { categoryData } from '../data/data';
+
+
+const Categories = () => {
+  const { category, subcategory } = useParams();
+
+  
+
+  const currentCategory = categoryData[category] || categoryData.jewelry;
+  const currentSubcategory = subcategory ? currentCategory.subcategories[subcategory] : null;
+
+  return (
+    <div className="py-12">
+      <div className="container mx-auto px-4">
+        {/* Breadcrumb */}
+        <div className="flex items-center text-sm text-gray-600 mb-8">
+          <Link to="/" className="hover:text-gold">Home</Link>
+          <ChevronRight className="w-4 h-4 mx-2" />
+          <Link to="/shop" className="hover:text-gold">Shop</Link>
+          <ChevronRight className="w-4 h-4 mx-2" />
+          <Link to={`/category/${category}`} className="hover:text-gold">{currentCategory.name}</Link>
+          {currentSubcategory && (
+            <>
+              <ChevronRight className="w-4 h-4 mx-2" />
+              <span className="text-gray-900 font-medium">{currentSubcategory.name}</span>
+            </>
+          )}
+        </div>
+
+        {/* Category Header */}
+        <div className="mb-12">
+          <h1 className="text-4xl font-playfair font-bold text-gray-900 mb-4">
+            {currentSubcategory ? currentSubcategory.name : currentCategory.name}
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl">
+            {currentSubcategory ? `${currentSubcategory.name} - ${currentCategory.description}` : currentCategory.description}
+          </p>
+        </div>
+
+        {/* Subcategories Grid */}
+        {!currentSubcategory && (
+          <div className="mb-12">
+            <h2 className="text-2xl font-semibold mb-6">Browse Collections</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Object.entries(currentCategory.subcategories).map(([key, subcat]) => (
+                <Link
+                  key={key}
+                  to={`/category/${category}/${key}`}
+                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition group"
+                >
+                  <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-3xl mb-2">✨</div>
+                      <h3 className="text-xl font-semibold">{subcat.name}</h3>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gold font-semibold">View Collection</span>
+                      <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition" />
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Products */}
+        {currentSubcategory && currentSubcategory.products && currentSubcategory.products.length > 0 ? (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {currentSubcategory.products.map((product) => (
+                <div key={product.uid} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="p-6">
+                    <h3 className="font-semibold text-lg mb-2">{product.name}</h3>
+                    <div className="flex items-center mb-4">
+                      <div className="flex text-yellow-400">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-4 h-4 ${i < Math.floor(product.rating) ? 'fill-current' : ''}`}
+                          />
+                        ))}
+                      </div>
+                      <span className="ml-2 text-gray-600">{product.rating}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-2xl font-bold text-gold">${product.price}</span>
+                      <button className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : currentSubcategory && (
+          <div className="text-center py-12 bg-gray-50 rounded-2xl">
+            <div className="text-5xl mb-4">🌟</div>
+            <h3 className="text-xl font-semibold mb-2">Coming Soon!</h3>
+            <p className="text-gray-600">This collection is currently being curated</p>
+          </div>
+        )}
+
+        {/* All Categories Navigation */}
+        <div className="mt-16 bg-gradient-to-r from-gray-50 to-gold/10 rounded-2xl p-8">
+          <h2 className="text-2xl font-playfair font-bold text-center mb-8">Explore All Categories</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {Object.entries(categoryData).map(([key, cat]) => (
+              <Link
+                key={key}
+                to={`/category/${key}`}
+                className={`p-6 rounded-xl text-center transition ${
+                  category === key
+                    ? 'bg-gold text-white'
+                    : 'bg-white text-gray-800 hover:shadow-lg'
+                }`}
+              >
+                <h3 className="text-xl font-semibold mb-2">{cat.name}</h3>
+                <p className="text-sm opacity-75">{cat.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Categories;
+
