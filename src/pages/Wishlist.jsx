@@ -1,19 +1,19 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Heart, ShoppingBag, X, ArrowRight } from 'lucide-react';
-import { useWishlist } from '../context/WishlistContext';
-import { useCart } from '../context/CartContext';
-import ProductCard from '../components/ProductCard';
-import Breadcrumb from '../components/Breadcrumb';
-import { toast } from 'react-toastify';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { Heart, ShoppingBag, X, ArrowRight } from "lucide-react";
+import { useWishlist } from "../context/WishlistContext";
+import { useCart } from "../context/CartContext";
+import ProductCard from "../components/ProductCard";
+import Breadcrumb from "../components/Breadcrumb";
+import { toast } from "react-toastify";
 
 const Wishlist = () => {
   const { wishlist, removeFromWishlist, clearWishlist } = useWishlist();
   const { addToCart } = useCart();
 
   const breadcrumbItems = [
-    { label: 'Home', path: '/' },
-    { label: 'Wishlist', path: '/wishlist' }
+    { label: "Home", path: "/" },
+    { label: "Wishlist", path: "/wishlist" },
   ];
 
   const handleAddToCart = (product) => {
@@ -22,10 +22,10 @@ const Wishlist = () => {
   };
 
   const handleMoveAllToCart = () => {
-    wishlist.items.forEach(product => {
+    wishlist.items.forEach((product) => {
       addToCart(product, 1);
     });
-    toast.success('All items moved to cart!');
+    toast.success("All items moved to cart!");
   };
 
   if (wishlist.items.length === 0) {
@@ -36,9 +36,12 @@ const Wishlist = () => {
           <div className="container-custom">
             <div className="max-w-md mx-auto text-center">
               <Heart className="w-24 h-24 text-gray-300 mx-auto mb-6" />
-              <h2 className="text-3xl font-bold mb-4">Your wishlist is empty</h2>
+              <h2 className="text-3xl font-bold mb-4">
+                Your wishlist is empty
+              </h2>
               <p className="text-gray-600 dark:text-gray-300 mb-8">
-                Save items you love to your wishlist. Review them anytime and easily move them to the bag.
+                Save items you love to your wishlist. Review them anytime and
+                easily move them to the bag.
               </p>
               <Link to="/shop" className="btn-primary inline-flex items-center">
                 Start Shopping
@@ -58,9 +61,12 @@ const Wishlist = () => {
         <div className="container-custom">
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h1 className="text-4xl font-playfair font-bold mb-2">My Wishlist</h1>
+              <h1 className="text-4xl font-playfair font-bold mb-2">
+                My Wishlist
+              </h1>
               <p className="text-gray-600 dark:text-gray-300">
-                {wishlist.items.length} {wishlist.items.length === 1 ? 'item' : 'items'}
+                {wishlist.items.length}{" "}
+                {wishlist.items.length === 1 ? "item" : "items"}
               </p>
             </div>
             <div className="flex gap-4">
@@ -74,7 +80,7 @@ const Wishlist = () => {
               <button
                 onClick={() => {
                   clearWishlist();
-                  toast.info('Wishlist cleared');
+                  toast.info("Wishlist cleared");
                 }}
                 className="btn-secondary flex items-center"
               >
@@ -110,12 +116,17 @@ const Wishlist = () => {
 
           {/* Recommendations */}
           <div className="mt-16">
-            <h2 className="text-2xl font-playfair font-bold mb-8">You Might Also Like</h2>
+            <h2 className="text-2xl font-playfair font-bold mb-8">
+              You Might Also Like
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Add recommended products here */}
               <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-xl">
                 <p className="text-gray-500 mb-4">More products coming soon</p>
-                <Link to="/shop" className="text-gold hover:underline font-medium">
+                <Link
+                  to="/shop"
+                  className="text-gold hover:underline font-medium"
+                >
                   Browse All Products →
                 </Link>
               </div>
