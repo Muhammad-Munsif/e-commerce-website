@@ -1,57 +1,64 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { ShoppingCart, Heart, Star, Eye } from 'lucide-react'
-import { addToCart } from '../redux/slices/cartSlice'
-import { toggleWishlist, selectIsInWishlist } from '../redux/slices/wishlistSlice'
-import { toast } from 'react-hot-toast'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { ShoppingCart, Heart, Star, Eye } from "lucide-react";
+import { addToCart } from "../redux/slices/cartSlice";
+import {
+  toggleWishlist,
+  selectIsInWishlist,
+} from "../redux/slices/wishlistSlice";
+import { toast } from "react-hot-toast";
 
 const ProductCard = ({ product }) => {
-  const [quantity, setQuantity] = useState(1)
-  const [isHovered, setIsHovered] = useState(false)
-  const dispatch = useDispatch()
-  const isInWishlist = useSelector((state) => selectIsInWishlist(state, product.uid))
+  const [quantity, setQuantity] = useState(1);
+  const [isHovered, setIsHovered] = useState(false);
+  const dispatch = useDispatch();
+  const isInWishlist = useSelector((state) =>
+    selectIsInWishlist(state, product.uid)
+  );
 
   const discountedPrice = product.discount
     ? product.price * (1 - product.discount / 100)
-    : product.price
+    : product.price;
 
   const handleAddToCart = () => {
-    dispatch(addToCart({
-      ...product,
-      quantity
-    }))
-    setQuantity(1)
-    toast.success(`${product.name} added to cart!`)
-  }
+    dispatch(
+      addToCart({
+        ...product,
+        quantity,
+      })
+    );
+    setQuantity(1);
+    toast.success(`${product.name} added to cart!`);
+  };
 
   const handleWishlistToggle = () => {
-    dispatch(toggleWishlist(product))
-  }
+    dispatch(toggleWishlist(product));
+  };
 
   const renderStars = (rating) => {
-    const stars = []
-    const fullStars = Math.floor(rating)
-    const hasHalfStar = rating % 1 >= 0.5
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
 
     for (let i = 1; i <= 5; i++) {
       if (i <= fullStars) {
         stars.push(
           <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
-        )
+        );
       } else if (i === fullStars + 1 && hasHalfStar) {
         stars.push(
           <Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
-        )
+        );
       } else {
-        stars.push(<Star key={i} size={16} className="text-gray-300" />)
+        stars.push(<Star key={i} size={16} className="text-gray-300" />);
       }
     }
-    return stars
-  }
+    return stars;
+  };
 
   return (
-    <div 
+    <div
       className="group bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 card-hover"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -77,17 +84,21 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Quick Actions */}
-        <div className={`absolute top-3 right-3 space-y-2 transition-opacity duration-300 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}>
+        <div
+          className={`absolute top-3 right-3 space-y-2 transition-opacity duration-300 ${
+            isHovered ? "opacity-100" : "opacity-0"
+          }`}
+        >
           <button
             onClick={handleWishlistToggle}
             className={`p-2 rounded-full bg-white dark:bg-gray-800 shadow-lg transition ${
-              isInWishlist ? 'text-red-500' : 'text-gray-600 hover:text-red-500'
+              isInWishlist ? "text-red-500" : "text-gray-600 hover:text-red-500"
             }`}
-            aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+            aria-label={
+              isInWishlist ? "Remove from wishlist" : "Add to wishlist"
+            }
           >
-            <Heart size={20} className={isInWishlist ? 'fill-red-500' : ''} />
+            <Heart size={20} className={isInWishlist ? "fill-red-500" : ""} />
           </button>
           <Link
             to={`/product/${product.uid}`}
@@ -104,7 +115,7 @@ const ProductCard = ({ product }) => {
         {/* Category */}
         <div className="mb-2">
           <span className="text-sm text-gold font-semibold">
-            {product.category || 'Premium'}
+            {product.category || "Premium"}
           </span>
         </div>
 
@@ -117,7 +128,8 @@ const ProductCard = ({ product }) => {
 
         {/* Product Description */}
         <p className="text-gray-500 dark:text-gray-300 text-sm mb-4 line-clamp-2 min-h-[40px]">
-          {product.description || 'Premium quality product with authentic materials'}
+          {product.description ||
+            "Premium quality product with authentic materials"}
         </p>
 
         {/* Rating */}
@@ -152,8 +164,8 @@ const ProductCard = ({ product }) => {
                 disabled={quantity <= 1}
                 className={`px-2 md:px-3 py-2 transition-colors ${
                   quantity <= 1
-                    ? 'text-gray-300 dark:text-gray-600 cursor-not-allowed'
-                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gold'
+                    ? "text-gray-300 dark:text-gray-600 cursor-not-allowed"
+                    : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gold"
                 }`}
                 aria-label="Decrease quantity"
               >
@@ -184,14 +196,10 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductCard
-
-
-
-
+export default ProductCard;
 
 // import React, { useState } from 'react'
 // import { Link } from 'react-router-dom'
@@ -245,7 +253,7 @@ export default ProductCard
 //   }
 
 //   return (
-//     <div 
+//     <div
 //       className="group bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 card-hover"
 //       onMouseEnter={() => setIsHovered(true)}
 //       onMouseLeave={() => setIsHovered(false)}
@@ -381,14 +389,6 @@ export default ProductCard
 // }
 
 // export default ProductCard
-
-
-
-
-
-
-
-
 
 // import React, { useState } from "react";
 // import { ShoppingCart, Heart, Plus, Minus, Star } from "lucide-react";
