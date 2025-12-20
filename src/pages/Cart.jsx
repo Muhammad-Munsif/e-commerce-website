@@ -1,20 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Trash2, Plus, Minus, ShoppingBag, ArrowRight, Truck, Shield, CreditCard } from 'lucide-react';
-import { useCart } from '../context/CartContext';
-import Breadcrumb from '../components/Breadcrumb';
-import { toast } from 'react-toastify';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  Trash2,
+  Plus,
+  Minus,
+  ShoppingBag,
+  ArrowRight,
+  Truck,
+  Shield,
+  CreditCard,
+} from "lucide-react";
+import { useCart } from "../context/CartContext";
+import Breadcrumb from "../components/Breadcrumb";
+import { toast } from "react-toastify";
 
 const Cart = () => {
-  const { cart, updateQuantity, removeFromCart, clearCart, cartTotal, cartCount } = useCart();
-  const [couponCode, setCouponCode] = useState('');
+  const {
+    cart,
+    updateQuantity,
+    removeFromCart,
+    clearCart,
+    cartTotal,
+    cartCount,
+  } = useCart();
+  const [couponCode, setCouponCode] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [suggestedProducts, setSuggestedProducts] = useState([]);
 
   const coupons = {
     WELCOME25: { discount: 0.25, minAmount: 0 },
     SUMMER15: { discount: 0.15, minAmount: 100 },
-    FREESHIP: { discount: 0, shipping: 0, minAmount: 50 }
+    FREESHIP: { discount: 0, shipping: 0, minAmount: 50 },
   };
 
   useEffect(() => {
@@ -26,16 +42,18 @@ const Cart = () => {
           id: 101,
           name: "Matching Diamond Earrings",
           price: 899.99,
-          image: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=400&fit=crop",
-          category: "jewelry"
+          image:
+            "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=400&fit=crop",
+          category: "jewelry",
         },
         {
           id: 102,
           name: "Leather Keychain",
           price: 29.99,
-          image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&h=400&fit=crop",
-          category: "wallets"
-        }
+          image:
+            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&h=400&fit=crop",
+          category: "wallets",
+        },
       ];
       setSuggestedProducts(suggestions);
     };
@@ -47,11 +65,11 @@ const Cart = () => {
     if (coupon && cartTotal >= coupon.minAmount) {
       setAppliedCoupon({
         code: couponCode.toUpperCase(),
-        ...coupon
+        ...coupon,
       });
       toast.success(`Coupon "${couponCode.toUpperCase()}" applied!`);
     } else {
-      toast.error('Invalid coupon code or minimum amount not reached');
+      toast.error("Invalid coupon code or minimum amount not reached");
     }
   };
 
@@ -60,16 +78,20 @@ const Cart = () => {
     return cartTotal * appliedCoupon.discount;
   };
 
-  const shipping = appliedCoupon && appliedCoupon.shipping === 0 ? 0 : 
-                  cartTotal >= 100 ? 0 : 9.99;
-  
+  const shipping =
+    appliedCoupon && appliedCoupon.shipping === 0
+      ? 0
+      : cartTotal >= 100
+      ? 0
+      : 9.99;
+
   const subtotal = cartTotal - calculateDiscount();
   const tax = subtotal * 0.08; // 8% tax
   const total = subtotal + shipping + tax;
 
   const breadcrumbItems = [
-    { label: 'Home', path: '/' },
-    { label: 'Cart', path: '/cart' }
+    { label: "Home", path: "/" },
+    { label: "Cart", path: "/cart" },
   ];
 
   if (cartCount === 0) {
@@ -100,7 +122,9 @@ const Cart = () => {
       <Breadcrumb items={breadcrumbItems} />
       <div className="section-padding">
         <div className="container-custom">
-          <h1 className="text-4xl font-playfair font-bold mb-8">Shopping Cart</h1>
+          <h1 className="text-4xl font-playfair font-bold mb-8">
+            Shopping Cart
+          </h1>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Cart Items */}
@@ -111,7 +135,7 @@ const Cart = () => {
                   <button
                     onClick={() => {
                       clearCart();
-                      toast.info('Cart cleared');
+                      toast.info("Cart cleared");
                     }}
                     className="text-red-500 hover:text-red-700 text-sm font-medium flex items-center"
                   >
@@ -126,14 +150,17 @@ const Cart = () => {
                       key={item.id}
                       className="flex flex-col sm:flex-row items-center gap-6 p-4 border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
                     >
-                      <Link to={`/product/${item.id}`} className="flex-shrink-0">
+                      <Link
+                        to={`/product/${item.id}`}
+                        className="flex-shrink-0"
+                      >
                         <img
                           src={item.image}
                           alt={item.name}
                           className="w-32 h-32 object-cover rounded-lg"
                         />
                       </Link>
-                      
+
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between">
                           <div className="mb-4 sm:mb-0 sm:mr-4">
@@ -143,7 +170,7 @@ const Cart = () => {
                               </h3>
                             </Link>
                             <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">
-                              {item.material && item.material.join(' • ')}
+                              {item.material && item.material.join(" • ")}
                             </p>
                             {item.discount > 0 && (
                               <span className="inline-block bg-red-100 text-red-800 text-xs font-semibold px-2 py-1 rounded">
@@ -151,10 +178,15 @@ const Cart = () => {
                               </span>
                             )}
                           </div>
-                          
+
                           <div className="text-right">
                             <p className="text-2xl font-bold text-gold mb-2">
-                              ${((item.discount ? item.price * (1 - item.discount / 100) : item.price) * item.quantity).toFixed(2)}
+                              $
+                              {(
+                                (item.discount
+                                  ? item.price * (1 - item.discount / 100)
+                                  : item.price) * item.quantity
+                              ).toFixed(2)}
                             </p>
                             {item.discount > 0 && (
                               <p className="text-sm text-gray-500 line-through">
@@ -168,7 +200,9 @@ const Cart = () => {
                           <div className="flex items-center space-x-4">
                             <div className="flex items-center border dark:border-gray-700 rounded-lg overflow-hidden">
                               <button
-                                onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                onClick={() =>
+                                  updateQuantity(item.id, item.quantity - 1)
+                                }
                                 className="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
                                 disabled={item.quantity <= 1}
                               >
@@ -178,13 +212,15 @@ const Cart = () => {
                                 {item.quantity}
                               </span>
                               <button
-                                onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                                onClick={() =>
+                                  updateQuantity(item.id, item.quantity + 1)
+                                }
                                 className="px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                               >
                                 <Plus className="w-4 h-4" />
                               </button>
                             </div>
-                            
+
                             <button
                               onClick={() => removeFromCart(item.id, item.name)}
                               className="text-red-500 hover:text-red-700 flex items-center"
@@ -193,9 +229,14 @@ const Cart = () => {
                               Remove
                             </button>
                           </div>
-                          
+
                           <div className="text-sm text-gray-500">
-                            ${(item.discount ? item.price * (1 - item.discount / 100) : item.price).toFixed(2)} each
+                            $
+                            {(item.discount
+                              ? item.price * (1 - item.discount / 100)
+                              : item.price
+                            ).toFixed(2)}{" "}
+                            each
                           </div>
                         </div>
                       </div>
@@ -207,10 +248,15 @@ const Cart = () => {
               {/* Suggested Products */}
               {suggestedProducts.length > 0 && (
                 <div className="mt-8 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-                  <h3 className="text-xl font-semibold mb-6">Frequently bought together</h3>
+                  <h3 className="text-xl font-semibold mb-6">
+                    Frequently bought together
+                  </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {suggestedProducts.map((product) => (
-                      <div key={product.id} className="flex items-center gap-4 p-4 border dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <div
+                        key={product.id}
+                        className="flex items-center gap-4 p-4 border dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                      >
                         <img
                           src={product.image}
                           alt={product.name}
@@ -218,7 +264,9 @@ const Cart = () => {
                         />
                         <div className="flex-1">
                           <h4 className="font-medium mb-1">{product.name}</h4>
-                          <p className="text-gold font-bold mb-2">${product.price.toFixed(2)}</p>
+                          <p className="text-gold font-bold mb-2">
+                            ${product.price.toFixed(2)}
+                          </p>
                           <button className="text-sm text-blue-600 hover:text-blue-800">
                             + Add to cart
                           </button>
@@ -240,7 +288,9 @@ const Cart = () => {
 
                 {/* Coupon Code */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium mb-2">Coupon Code</label>
+                  <label className="block text-sm font-medium mb-2">
+                    Coupon Code
+                  </label>
                   <div className="flex gap-2">
                     <input
                       type="text"
@@ -262,7 +312,8 @@ const Cart = () => {
                     </div>
                   )}
                   <div className="mt-3 text-xs text-gray-500">
-                    Try: WELCOME25 (25% off), SUMMER15 (15% off over $100), FREESHIP (free shipping)
+                    Try: WELCOME25 (25% off), SUMMER15 (15% off over $100),
+                    FREESHIP (free shipping)
                   </div>
                 </div>
 
@@ -272,24 +323,26 @@ const Cart = () => {
                     <span>Subtotal ({cartCount} items)</span>
                     <span>${cartTotal.toFixed(2)}</span>
                   </div>
-                  
+
                   {appliedCoupon && appliedCoupon.discount > 0 && (
                     <div className="flex justify-between text-green-600">
                       <span>Discount ({appliedCoupon.code})</span>
                       <span>-${calculateDiscount().toFixed(2)}</span>
                     </div>
                   )}
-                  
+
                   <div className="flex justify-between">
                     <span>Shipping</span>
-                    <span>{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+                    <span>
+                      {shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`}
+                    </span>
                   </div>
-                  
+
                   <div className="flex justify-between">
                     <span>Tax</span>
                     <span>${tax.toFixed(2)}</span>
                   </div>
-                  
+
                   <div className="border-t dark:border-gray-700 pt-3">
                     <div className="flex justify-between text-xl font-bold">
                       <span>Total</span>
@@ -342,9 +395,6 @@ const Cart = () => {
 };
 
 export default Cart;
-
-
-
 
 // import React, { useContext, useState } from 'react';
 // import { Link } from 'react-router-dom';
