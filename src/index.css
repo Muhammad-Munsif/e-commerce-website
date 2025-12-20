@@ -1,19 +1,19 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
-@import 'react-toastify/dist/ReactToastify.css';
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap");
+@import "react-toastify/dist/ReactToastify.css";
 
 /* @import 'tailwindcss'; */
 
 @theme {
-  --color-gold: #D4AF37;
-  --color-bronze: #CD7F32;
-  --font-playfair: 'Playfair Display', serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  
+  --color-gold: #d4af37;
+  --color-bronze: #cd7f32;
+  --font-playfair: "Playfair Display", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
   --animate-fadeIn: fadeIn 0.5s ease-out;
   --animate-slideIn: slideIn 0.3s ease-out;
   --animate-float: float 3s ease-in-out infinite;
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -24,7 +24,7 @@
       transform: translateY(0);
     }
   }
-  
+
   @keyframes slideIn {
     from {
       transform: translateX(-100%);
@@ -33,9 +33,10 @@
       transform: translateX(0);
     }
   }
-  
+
   @keyframes float {
-    0%, 100% {
+    0%,
+    100% {
       transform: translateY(0);
     }
     50% {
@@ -104,7 +105,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4AF37;
+  background: #d4af37;
   border-radius: 4px;
 }
 
