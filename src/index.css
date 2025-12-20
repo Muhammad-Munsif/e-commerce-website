@@ -1,17 +1,64 @@
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 @import 'react-toastify/dist/ReactToastify.css';
-@import "tailwindcss";
 
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+/* @import 'tailwindcss'; */
+
+@theme {
+  --color-gold: #D4AF37;
+  --color-bronze: #CD7F32;
+  --font-playfair: 'Playfair Display', serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  
+  --animate-fadeIn: fadeIn 0.5s ease-out;
+  --animate-slideIn: slideIn 0.3s ease-out;
+  --animate-float: float 3s ease-in-out infinite;
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added fixes to make sure it behaves like v3.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 @layer base {
-  :root {
-    --gold: #D4AF37;
-    --bronze: #CD7F32;
-  }
-
   html {
     scroll-behavior: smooth;
   }
@@ -41,15 +88,6 @@
   .section-padding {
     @apply py-8 md:py-12 lg:py-16;
   }
-
-  .container-custom {
-    @apply container mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  /* Responsive text utilities */
-  .text-responsive {
-    @apply text-sm sm:text-base md:text-lg lg:text-xl;
-  }
 }
 
 /* Custom Scrollbar */
@@ -58,89 +96,23 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-gray-800;
+  background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gold rounded-full;
+  background: #D4AF37;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-yellow-600;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.animate-slideIn {
-  animation: slideIn 0.3s ease-out;
+  background: #b89420;
 }
 
 /* Toast Customization */
 .Toastify__toast {
   @apply rounded-lg font-medium text-sm md:text-base;
-}
-
-/* Responsive table */
-.responsive-table {
-  @apply block w-full overflow-x-auto;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-}
-
-/* Mobile-first responsive design */
-@media (max-width: 640px) {
-  .mobile-hidden {
-    display: none !important;
-  }
-  
-  .mobile-full-width {
-    width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 768px) {
-  .tablet-full-width {
-    width: 100% !important;
-  }
-}
-
-/* Print styles */
-@media print {
-  .no-print {
-    display: none !important;
-  }
 }
