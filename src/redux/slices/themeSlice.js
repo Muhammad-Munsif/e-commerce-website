@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const loadThemeFromStorage = () => {
   try {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'light';
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme || "light";
   } catch (error) {
-    console.error('Error loading theme from storage:', error);
-    return 'light';
+    console.error("Error loading theme from storage:", error);
+    return "light";
   }
 };
 
@@ -15,19 +15,22 @@ const initialState = {
 };
 
 const themeSlice = createSlice({
-  name: 'theme',
+  name: "theme",
   initialState,
   reducers: {
     toggleTheme: (state) => {
-      state.mode = state.mode === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', state.mode);
-      document.documentElement.classList.toggle('dark');
+      state.mode = state.mode === "light" ? "dark" : "light";
+      localStorage.setItem("theme", state.mode);
+      document.documentElement.classList.toggle("dark");
     },
-    
+
     setTheme: (state, action) => {
       state.mode = action.payload;
-      localStorage.setItem('theme', action.payload);
-      document.documentElement.classList.toggle('dark', action.payload === 'dark');
+      localStorage.setItem("theme", action.payload);
+      document.documentElement.classList.toggle(
+        "dark",
+        action.payload === "dark"
+      );
     },
   },
 });
