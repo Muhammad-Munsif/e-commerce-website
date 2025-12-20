@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Filter,
   Grid,
@@ -7,25 +7,25 @@ import {
   ChevronDown,
   ShoppingCart,
   Star,
-} from 'lucide-react'
-import ProductCard from '../components/ProductCard'
-import ProductListItem from '../components/ProductListItem'
-import { categoryData } from '../data/products'
-import { selectTheme } from '../redux/slices/themeSlice'
+} from "lucide-react";
+import ProductCard from "../components/ProductCard";
+import ProductListItem from "../components/ProductListItem";
+import { categoryData } from "../data/products";
+import { selectTheme } from "../redux/slices/themeSlice";
 
 const Shop = () => {
-  const [viewMode, setViewMode] = useState('grid')
-  const [sortBy, setSortBy] = useState('featured')
-  const [priceRange, setPriceRange] = useState([0, 5000])
-  const [selectedCategory, setSelectedCategory] = useState('All')
-  const [selectedMaterials, setSelectedMaterials] = useState([])
-  const [allProducts, setAllProducts] = useState([])
-  const [showFilters, setShowFilters] = useState(false)
-  const theme = useSelector(selectTheme)
+  const [viewMode, setViewMode] = useState("grid");
+  const [sortBy, setSortBy] = useState("featured");
+  const [priceRange, setPriceRange] = useState([0, 5000]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedMaterials, setSelectedMaterials] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [showFilters, setShowFilters] = useState(false);
+  const theme = useSelector(selectTheme);
 
   // Extract all products from categoryData
   useEffect(() => {
-    const extractedProducts = []
+    const extractedProducts = [];
 
     Object.values(categoryData).forEach((category) => {
       Object.values(category.subcategories).forEach((subcategory) => {
@@ -34,49 +34,57 @@ const Shop = () => {
             ...product,
             mainCategory: category.name,
             subCategory: subcategory.name,
-            material: ['Premium', 'Luxury'],
-            discount: Math.random() > 0.5 ? Math.floor(Math.random() * 40) + 10 : 0,
+            material: ["Premium", "Luxury"],
+            discount:
+              Math.random() > 0.5 ? Math.floor(Math.random() * 40) + 10 : 0,
             freeDelivery: Math.random() > 0.3,
             rating: product.rating || 4.5,
             reviews: product.reviews || Math.floor(Math.random() * 100) + 1,
-          }))
-          extractedProducts.push(...enhancedProducts)
+          }));
+          extractedProducts.push(...enhancedProducts);
         }
-      })
-    })
+      });
+    });
 
-    setAllProducts(extractedProducts)
-  }, [])
+    setAllProducts(extractedProducts);
+  }, []);
 
   // Get all unique main categories
   const getCategories = () => {
-    const categories = { All: allProducts.length }
+    const categories = { All: allProducts.length };
 
     allProducts.forEach((product) => {
       if (product.mainCategory) {
         if (!categories[product.mainCategory]) {
-          categories[product.mainCategory] = 0
+          categories[product.mainCategory] = 0;
         }
-        categories[product.mainCategory]++
+        categories[product.mainCategory]++;
       }
-    })
+    });
 
     return Object.entries(categories).map(([name, count]) => ({
       name,
       count,
-    }))
-  }
+    }));
+  };
 
-  const categories = getCategories()
-  const materials = ['Leather', 'Gold', 'Silver', 'Diamond', 'Platinum', 'Glass']
+  const categories = getCategories();
+  const materials = [
+    "Leather",
+    "Gold",
+    "Silver",
+    "Diamond",
+    "Platinum",
+    "Glass",
+  ];
 
   const sortOptions = [
-    { value: 'featured', label: 'Featured' },
-    { value: 'price-low', label: 'Price: Low to High' },
-    { value: 'price-high', label: 'Price: High to Low' },
-    { value: 'rating', label: 'Highest Rated' },
-    { value: 'newest', label: 'Newest Arrivals' },
-  ]
+    { value: "featured", label: "Featured" },
+    { value: "price-low", label: "Price: Low to High" },
+    { value: "price-high", label: "Price: High to Low" },
+    { value: "rating", label: "Highest Rated" },
+    { value: "newest", label: "Newest Arrivals" },
+  ];
 
   // Handle material selection
   const handleMaterialToggle = (material) => {
@@ -84,45 +92,45 @@ const Shop = () => {
       prev.includes(material)
         ? prev.filter((m) => m !== material)
         : [...prev, material]
-    )
-  }
+    );
+  };
 
   // Filter products
   const filteredProducts = allProducts.filter((product) => {
     const inPriceRange =
-      product.price >= priceRange[0] && product.price <= priceRange[1]
+      product.price >= priceRange[0] && product.price <= priceRange[1];
     const inCategory =
-      selectedCategory === 'All' || product.mainCategory === selectedCategory
+      selectedCategory === "All" || product.mainCategory === selectedCategory;
     const hasMaterial =
       selectedMaterials.length === 0 ||
       (product.material &&
-        product.material.some((m) => selectedMaterials.includes(m)))
+        product.material.some((m) => selectedMaterials.includes(m)));
 
-    return inPriceRange && inCategory && hasMaterial
-  })
+    return inPriceRange && inCategory && hasMaterial;
+  });
 
   // Sort products
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
-      case 'price-low':
-        return a.price - b.price
-      case 'price-high':
-        return b.price - a.price
-      case 'rating':
-        return (b.rating || 0) - (a.rating || 0)
-      case 'newest':
-        return b.uid - a.uid
+      case "price-low":
+        return a.price - b.price;
+      case "price-high":
+        return b.price - a.price;
+      case "rating":
+        return (b.rating || 0) - (a.rating || 0);
+      case "newest":
+        return b.uid - a.uid;
       default:
-        return 0
+        return 0;
     }
-  })
+  });
 
   // Clear all filters
   const clearAllFilters = () => {
-    setSelectedCategory('All')
-    setSelectedMaterials([])
-    setPriceRange([0, 5000])
-  }
+    setSelectedCategory("All");
+    setSelectedMaterials([]);
+    setPriceRange([0, 5000]);
+  };
 
   return (
     <div className="py-8 md:py-12">
@@ -150,7 +158,7 @@ const Shop = () => {
               </div>
               <ChevronDown
                 className={`w-5 h-5 transition-transform ${
-                  showFilters ? 'rotate-180' : ''
+                  showFilters ? "rotate-180" : ""
                 }`}
               />
             </button>
@@ -173,16 +181,16 @@ const Shop = () => {
                         onClick={() => setSelectedCategory(category.name)}
                         className={`flex items-center justify-between w-full text-left p-2 md:p-3 rounded-lg transition ${
                           selectedCategory === category.name
-                            ? 'bg-gold bg-opacity-10 text-gold'
-                            : 'hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
+                            ? "bg-gold bg-opacity-10 text-gold"
+                            : "hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
                         }`}
                       >
                         <span className="font-medium">{category.name}</span>
                         <span
                           className={`text-sm ${
                             selectedCategory === category.name
-                              ? 'text-gold'
-                              : 'text-gray-500'
+                              ? "text-gold"
+                              : "text-gray-500"
                           }`}
                         >
                           ({category.count})
@@ -260,22 +268,22 @@ const Shop = () => {
                 <div className="flex items-center space-x-4 mb-4 md:mb-0">
                   <div className="flex items-center space-x-2">
                     <button
-                      onClick={() => setViewMode('grid')}
+                      onClick={() => setViewMode("grid")}
                       className={`p-2 rounded-lg ${
-                        viewMode === 'grid'
-                          ? 'bg-gold text-white'
-                          : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        viewMode === "grid"
+                          ? "bg-gold text-white"
+                          : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                       }`}
                       aria-label="Grid view"
                     >
                       <Grid className="w-5 h-5" />
                     </button>
                     <button
-                      onClick={() => setViewMode('list')}
+                      onClick={() => setViewMode("list")}
                       className={`p-2 rounded-lg ${
-                        viewMode === 'list'
-                          ? 'bg-gold text-white'
-                          : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                        viewMode === "list"
+                          ? "bg-gold text-white"
+                          : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
                       }`}
                       aria-label="List view"
                     >
@@ -283,14 +291,16 @@ const Shop = () => {
                     </button>
                   </div>
                   <span className="text-gray-600 dark:text-gray-300">
-                    {sortedProducts.length}{' '}
-                    {sortedProducts.length === 1 ? 'product' : 'products'} found
-                    {selectedCategory !== 'All' && ` in ${selectedCategory}`}
+                    {sortedProducts.length}{" "}
+                    {sortedProducts.length === 1 ? "product" : "products"} found
+                    {selectedCategory !== "All" && ` in ${selectedCategory}`}
                   </span>
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <span className="text-gray-600 dark:text-gray-300">Sort by:</span>
+                  <span className="text-gray-600 dark:text-gray-300">
+                    Sort by:
+                  </span>
                   <div className="relative">
                     <select
                       value={sortBy}
@@ -311,7 +321,7 @@ const Shop = () => {
 
             {/* Products Grid/List */}
             {sortedProducts.length > 0 ? (
-              viewMode === 'grid' ? (
+              viewMode === "grid" ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                   {sortedProducts.map((product) => (
                     <ProductCard key={product.uid} product={product} />
@@ -351,8 +361,8 @@ const Shop = () => {
                       key={page}
                       className={`w-10 h-10 rounded-lg transition ${
                         page === 1
-                          ? 'bg-gold text-white'
-                          : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border dark:border-gray-700'
+                          ? "bg-gold text-white"
+                          : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border dark:border-gray-700"
                       }`}
                     >
                       {page}
@@ -368,10 +378,10 @@ const Shop = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Shop
+export default Shop;
 
 // import React, { useState, useEffect } from "react";
 // import {
