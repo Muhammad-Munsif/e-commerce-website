@@ -41,15 +41,15 @@
 
 // export default themeSlice.reducer;
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const loadThemeFromStorage = () => {
   try {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'light';
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme || "light";
   } catch (error) {
-    console.error('Error loading theme from storage:', error);
-    return 'light';
+    console.error("Error loading theme from storage:", error);
+    return "light";
   }
 };
 
@@ -58,27 +58,27 @@ const initialState = {
 };
 
 const themeSlice = createSlice({
-  name: 'theme',
+  name: "theme",
   initialState,
   reducers: {
     toggleTheme: (state) => {
-      state.mode = state.mode === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', state.mode);
+      state.mode = state.mode === "light" ? "dark" : "light";
+      localStorage.setItem("theme", state.mode);
       // Apply theme to document
-      if (state.mode === 'dark') {
-        document.documentElement.classList.add('dark');
+      if (state.mode === "dark") {
+        document.documentElement.classList.add("dark");
       } else {
-        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.remove("dark");
       }
     },
-    
+
     setTheme: (state, action) => {
       state.mode = action.payload;
-      localStorage.setItem('theme', action.payload);
-      if (action.payload === 'dark') {
-        document.documentElement.classList.add('dark');
+      localStorage.setItem("theme", action.payload);
+      if (action.payload === "dark") {
+        document.documentElement.classList.add("dark");
       } else {
-        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.remove("dark");
       }
     },
   },
