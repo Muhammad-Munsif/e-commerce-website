@@ -566,9 +566,9 @@
 
 // export default Account;
 
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   User,
   ShoppingBag,
@@ -578,9 +578,18 @@ import {
   LogOut,
   Edit2,
   CheckCircle,
-} from 'lucide-react';
-import { loginUser, registerUser, logout, updateProfile, selectUser, selectAuthLoading, selectAuthError, clearError } from '../redux/slices/authSlice';
-import Breadcrumb from '../components/Breadcrumb';
+} from "lucide-react";
+import {
+  loginUser,
+  registerUser,
+  logout,
+  updateProfile,
+  selectUser,
+  selectAuthLoading,
+  selectAuthError,
+  clearError,
+} from "../redux/slices/authSlice";
+import Breadcrumb from "../components/Breadcrumb";
 
 const Account = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -588,22 +597,22 @@ const Account = () => {
   const [orders, setOrders] = useState([]);
 
   const [loginData, setLoginData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
 
   const [registerData, setRegisterData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [profileData, setProfileData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    address: ''
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
   });
 
   const dispatch = useDispatch();
@@ -612,21 +621,21 @@ const Account = () => {
   const error = useSelector(selectAuthError);
 
   const breadcrumbItems = [
-    { label: 'Home', path: '/' },
-    { label: 'Account', path: '/account' }
+    { label: "Home", path: "/" },
+    { label: "Account", path: "/account" },
   ];
 
   // Load orders from localStorage
   useEffect(() => {
     if (user) {
-      const savedOrders = JSON.parse(localStorage.getItem('orders') || '[]');
+      const savedOrders = JSON.parse(localStorage.getItem("orders") || "[]");
       setOrders(savedOrders);
       // Initialize profile data with user info
       setProfileData({
-        name: user.name || '',
-        email: user.email || '',
-        phone: '',
-        address: ''
+        name: user.name || "",
+        email: user.email || "",
+        phone: "",
+        address: "",
       });
     }
   }, [user]);
@@ -641,21 +650,21 @@ const Account = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!loginData.email || !loginData.password) {
-      alert('Please fill in all fields');
+      alert("Please fill in all fields");
       return;
     }
     await dispatch(loginUser(loginData));
-    setLoginData({ email: '', password: '' });
+    setLoginData({ email: "", password: "" });
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     if (registerData.password !== registerData.confirmPassword) {
-      alert('Passwords do not match');
+      alert("Passwords do not match");
       return;
     }
     await dispatch(registerUser(registerData));
-    setRegisterData({ name: '', email: '', password: '', confirmPassword: '' });
+    setRegisterData({ name: "", email: "", password: "", confirmPassword: "" });
   };
 
   const handleUpdateProfile = (e) => {
@@ -669,10 +678,15 @@ const Account = () => {
   };
 
   const accountTabs = [
-    { id: 'orders', label: 'My Orders', icon: ShoppingBag, count: orders.length },
-    { id: 'wishlist', label: 'Wishlist', icon: Heart, count: 0 },
-    { id: 'addresses', label: 'Addresses', icon: MapPin, count: 1 },
-    { id: 'settings', label: 'Settings', icon: Settings, count: 0 }
+    {
+      id: "orders",
+      label: "My Orders",
+      icon: ShoppingBag,
+      count: orders.length,
+    },
+    { id: "wishlist", label: "Wishlist", icon: Heart, count: 0 },
+    { id: "addresses", label: "Addresses", icon: MapPin, count: 1 },
+    { id: "settings", label: "Settings", icon: Settings, count: 0 },
   ];
 
   if (!user) {
@@ -687,10 +701,12 @@ const Account = () => {
                   <User size={40} className="text-gold" />
                 </div>
                 <h2 className="text-2xl font-bold">
-                  {isLogin ? 'Welcome Back' : 'Create Account'}
+                  {isLogin ? "Welcome Back" : "Create Account"}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">
-                  {isLogin ? 'Sign in to your account' : 'Register for a new account'}
+                  {isLogin
+                    ? "Sign in to your account"
+                    : "Register for a new account"}
                 </p>
               </div>
 
@@ -706,8 +722,8 @@ const Account = () => {
                   onClick={() => setIsLogin(true)}
                   className={`flex-1 py-3 text-center font-medium rounded-l-lg transition-colors ${
                     isLogin
-                      ? 'bg-gold text-white'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      ? "bg-gold text-white"
+                      : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
                   }`}
                 >
                   Login
@@ -716,8 +732,8 @@ const Account = () => {
                   onClick={() => setIsLogin(false)}
                   className={`flex-1 py-3 text-center font-medium rounded-r-lg transition-colors ${
                     !isLogin
-                      ? 'bg-gold text-white'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      ? "bg-gold text-white"
+                      : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600"
                   }`}
                 >
                   Register
@@ -727,22 +743,30 @@ const Account = () => {
               {isLogin ? (
                 <form onSubmit={handleLogin} className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Email Address</label>
+                    <label className="block text-sm font-medium mb-2">
+                      Email Address
+                    </label>
                     <input
                       type="email"
                       value={loginData.email}
-                      onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+                      onChange={(e) =>
+                        setLoginData({ ...loginData, email: e.target.value })
+                      }
                       className="input-field"
                       required
                       disabled={loading}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Password</label>
+                    <label className="block text-sm font-medium mb-2">
+                      Password
+                    </label>
                     <input
                       type="password"
                       value={loginData.password}
-                      onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+                      onChange={(e) =>
+                        setLoginData({ ...loginData, password: e.target.value })
+                      }
                       className="input-field"
                       required
                       disabled={loading}
@@ -750,60 +774,93 @@ const Account = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <label className="flex items-center">
-                      <input type="checkbox" className="rounded text-gold focus:ring-gold mr-2" />
+                      <input
+                        type="checkbox"
+                        className="rounded text-gold focus:ring-gold mr-2"
+                      />
                       <span className="text-sm">Remember me</span>
                     </label>
-                    <a href="#" className="text-sm text-gold hover:underline">Forgot password?</a>
+                    <a href="#" className="text-sm text-gold hover:underline">
+                      Forgot password?
+                    </a>
                   </div>
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="btn-primary w-full"
                     disabled={loading}
                   >
-                    {loading ? 'Signing in...' : 'Sign In'}
+                    {loading ? "Signing in..." : "Sign In"}
                   </button>
                 </form>
               ) : (
                 <form onSubmit={handleRegister} className="space-y-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Full Name</label>
+                    <label className="block text-sm font-medium mb-2">
+                      Full Name
+                    </label>
                     <input
                       type="text"
                       value={registerData.name}
-                      onChange={(e) => setRegisterData({ ...registerData, name: e.target.value })}
+                      onChange={(e) =>
+                        setRegisterData({
+                          ...registerData,
+                          name: e.target.value,
+                        })
+                      }
                       className="input-field"
                       required
                       disabled={loading}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Email Address</label>
+                    <label className="block text-sm font-medium mb-2">
+                      Email Address
+                    </label>
                     <input
                       type="email"
                       value={registerData.email}
-                      onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
+                      onChange={(e) =>
+                        setRegisterData({
+                          ...registerData,
+                          email: e.target.value,
+                        })
+                      }
                       className="input-field"
                       required
                       disabled={loading}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Password</label>
+                    <label className="block text-sm font-medium mb-2">
+                      Password
+                    </label>
                     <input
                       type="password"
                       value={registerData.password}
-                      onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
+                      onChange={(e) =>
+                        setRegisterData({
+                          ...registerData,
+                          password: e.target.value,
+                        })
+                      }
                       className="input-field"
                       required
                       disabled={loading}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">Confirm Password</label>
+                    <label className="block text-sm font-medium mb-2">
+                      Confirm Password
+                    </label>
                     <input
                       type="password"
                       value={registerData.confirmPassword}
-                      onChange={(e) => setRegisterData({ ...registerData, confirmPassword: e.target.value })}
+                      onChange={(e) =>
+                        setRegisterData({
+                          ...registerData,
+                          confirmPassword: e.target.value,
+                        })
+                      }
                       className="input-field"
                       required
                       disabled={loading}
@@ -817,16 +874,18 @@ const Account = () => {
                       disabled={loading}
                     />
                     <span className="text-sm">
-                      I agree to the{' '}
-                      <a href="#" className="text-gold hover:underline">Terms & Conditions</a>
+                      I agree to the{" "}
+                      <a href="#" className="text-gold hover:underline">
+                        Terms & Conditions
+                      </a>
                     </span>
                   </div>
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="btn-primary w-full"
                     disabled={loading}
                   >
-                    {loading ? 'Creating Account...' : 'Create Account'}
+                    {loading ? "Creating Account..." : "Create Account"}
                   </button>
                 </form>
               )}
@@ -855,7 +914,9 @@ const Account = () => {
                   />
                   <div>
                     <h3 className="font-bold text-lg">{user.name}</h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm">{user.email}</p>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm">
+                      {user.email}
+                    </p>
                     <button
                       onClick={() => setIsEditing(true)}
                       className="text-sm text-gold hover:underline mt-1 flex items-center"
@@ -913,37 +974,65 @@ const Account = () => {
                   <form onSubmit={handleUpdateProfile} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium mb-2">Full Name</label>
+                        <label className="block text-sm font-medium mb-2">
+                          Full Name
+                        </label>
                         <input
                           type="text"
                           value={profileData.name}
-                          onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
+                          onChange={(e) =>
+                            setProfileData({
+                              ...profileData,
+                              name: e.target.value,
+                            })
+                          }
                           className="input-field"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2">Email</label>
+                        <label className="block text-sm font-medium mb-2">
+                          Email
+                        </label>
                         <input
                           type="email"
                           value={profileData.email}
-                          onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
+                          onChange={(e) =>
+                            setProfileData({
+                              ...profileData,
+                              email: e.target.value,
+                            })
+                          }
                           className="input-field"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-2">Phone</label>
+                        <label className="block text-sm font-medium mb-2">
+                          Phone
+                        </label>
                         <input
                           type="tel"
                           value={profileData.phone}
-                          onChange={(e) => setProfileData({ ...profileData, phone: e.target.value })}
+                          onChange={(e) =>
+                            setProfileData({
+                              ...profileData,
+                              phone: e.target.value,
+                            })
+                          }
                           className="input-field"
                         />
                       </div>
                       <div className="md:col-span-2">
-                        <label className="block text-sm font-medium mb-2">Address</label>
+                        <label className="block text-sm font-medium mb-2">
+                          Address
+                        </label>
                         <textarea
                           value={profileData.address}
-                          onChange={(e) => setProfileData({ ...profileData, address: e.target.value })}
+                          onChange={(e) =>
+                            setProfileData({
+                              ...profileData,
+                              address: e.target.value,
+                            })
+                          }
                           className="input-field"
                           rows="3"
                         />
@@ -966,13 +1055,23 @@ const Account = () => {
               )}
 
               {/* Orders Section */}
-              <div id="orders" className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+              <div
+                id="orders"
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8"
+              >
                 <h3 className="text-xl font-semibold mb-6">Recent Orders</h3>
                 {orders.length === 0 ? (
                   <div className="text-center py-8">
-                    <ShoppingBag size={64} className="text-gray-300 mx-auto mb-4" />
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">No orders yet</p>
-                    <Link to="/shop" className="btn-primary">Start Shopping</Link>
+                    <ShoppingBag
+                      size={64}
+                      className="text-gray-300 mx-auto mb-4"
+                    />
+                    <p className="text-gray-600 dark:text-gray-300 mb-4">
+                      No orders yet
+                    </p>
+                    <Link to="/shop" className="btn-primary">
+                      Start Shopping
+                    </Link>
                   </div>
                 ) : (
                   <div className="space-y-4">
@@ -988,17 +1087,23 @@ const Account = () => {
                               {new Date(order.date).toLocaleDateString()}
                             </p>
                           </div>
-                          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            order.status === 'processing' ? 'bg-yellow-100 text-yellow-800' :
-                            order.status === 'shipped' ? 'bg-blue-100 text-blue-800' :
-                            'bg-green-100 text-green-800'
-                          }`}>
-                            {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                          <span
+                            className={`px-3 py-1 rounded-full text-sm font-medium ${
+                              order.status === "processing"
+                                ? "bg-yellow-100 text-yellow-800"
+                                : order.status === "shipped"
+                                ? "bg-blue-100 text-blue-800"
+                                : "bg-green-100 text-green-800"
+                            }`}
+                          >
+                            {order.status.charAt(0).toUpperCase() +
+                              order.status.slice(1)}
                           </span>
                         </div>
                         <div className="flex justify-between items-center">
                           <p className="text-gray-600 dark:text-gray-300">
-                            {order.items.length} items • ${order.total.toFixed(2)}
+                            {order.items.length} items • $
+                            {order.total.toFixed(2)}
                           </p>
                           <Link
                             to={`/orders/${order.id}`}
@@ -1025,7 +1130,10 @@ const Account = () => {
                       <p className="text-sm text-gray-600">Total Orders</p>
                     </div>
                   </div>
-                  <Link to="#orders" className="text-gold hover:underline text-sm">
+                  <Link
+                    to="#orders"
+                    className="text-gold hover:underline text-sm"
+                  >
                     View all orders →
                   </Link>
                 </div>
@@ -1033,14 +1141,20 @@ const Account = () => {
                 <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 rounded-xl p-6">
                   <div className="flex items-center mb-4">
                     <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
-                      <Heart size={24} className="text-blue-600 dark:text-blue-400" />
+                      <Heart
+                        size={24}
+                        className="text-blue-600 dark:text-blue-400"
+                      />
                     </div>
                     <div>
                       <p className="text-2xl font-bold">12</p>
                       <p className="text-sm text-gray-600">Wishlist Items</p>
                     </div>
                   </div>
-                  <Link to="/wishlist" className="text-blue-600 hover:underline text-sm">
+                  <Link
+                    to="/wishlist"
+                    className="text-blue-600 hover:underline text-sm"
+                  >
                     View wishlist →
                   </Link>
                 </div>
@@ -1048,14 +1162,20 @@ const Account = () => {
                 <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl p-6">
                   <div className="flex items-center mb-4">
                     <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-4">
-                      <CheckCircle size={24} className="text-green-600 dark:text-green-400" />
+                      <CheckCircle
+                        size={24}
+                        className="text-green-600 dark:text-green-400"
+                      />
                     </div>
                     <div>
                       <p className="text-2xl font-bold">100%</p>
                       <p className="text-sm text-gray-600">Success Rate</p>
                     </div>
                   </div>
-                  <Link to="#orders" className="text-green-600 hover:underline text-sm">
+                  <Link
+                    to="#orders"
+                    className="text-green-600 hover:underline text-sm"
+                  >
                     View statistics →
                   </Link>
                 </div>
