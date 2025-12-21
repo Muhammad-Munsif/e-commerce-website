@@ -1,13 +1,13 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-hot-toast';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { toast } from "react-hot-toast";
 
 // Load user from localStorage
 const loadUserFromStorage = () => {
   try {
-    const savedUser = localStorage.getItem('user');
+    const savedUser = localStorage.getItem("user");
     return savedUser ? JSON.parse(savedUser) : null;
   } catch (error) {
-    console.error('Error loading user from storage:', error);
+    console.error("Error loading user from storage:", error);
     return null;
   }
 };
@@ -20,21 +20,22 @@ const initialState = {
 
 // Async thunks for API calls
 export const loginUser = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // Mock user data - in real app, this would come from your API
       const mockUser = {
         id: 1,
-        name: 'John Doe',
+        name: "John Doe",
         email: email,
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-        role: 'customer'
+        avatar:
+          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+        role: "customer",
       };
-      
+
       return mockUser;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -43,19 +44,20 @@ export const loginUser = createAsyncThunk(
 );
 
 export const registerUser = createAsyncThunk(
-  'auth/register',
+  "auth/register",
   async (userData, { rejectWithValue }) => {
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       const newUser = {
         id: Date.now(),
         ...userData,
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
-        role: 'customer'
+        avatar:
+          "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
+        role: "customer",
       };
-      
+
       return newUser;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -64,24 +66,24 @@ export const registerUser = createAsyncThunk(
 );
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     logout: (state) => {
       state.user = null;
       state.error = null;
-      localStorage.removeItem('user');
-      toast.success('Logged out successfully');
+      localStorage.removeItem("user");
+      toast.success("Logged out successfully");
     },
-    
+
     updateProfile: (state, action) => {
       if (state.user) {
         state.user = { ...state.user, ...action.payload };
-        localStorage.setItem('user', JSON.stringify(state.user));
-        toast.success('Profile updated successfully');
+        localStorage.setItem("user", JSON.stringify(state.user));
+        toast.success("Profile updated successfully");
       }
     },
-    
+
     clearError: (state) => {
       state.error = null;
     },
@@ -96,15 +98,15 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        localStorage.setItem('user', JSON.stringify(action.payload));
+        localStorage.setItem("user", JSON.stringify(action.payload));
         toast.success(`Welcome back, ${action.payload.name}!`);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Login failed';
-        toast.error('Login failed. Please try again.');
+        state.error = action.payload || "Login failed";
+        toast.error("Login failed. Please try again.");
       })
-      
+
       // Register cases
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
@@ -113,13 +115,13 @@ const authSlice = createSlice({
       .addCase(registerUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        localStorage.setItem('user', JSON.stringify(action.payload));
-        toast.success('Registration successful!');
+        localStorage.setItem("user", JSON.stringify(action.payload));
+        toast.success("Registration successful!");
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Registration failed';
-        toast.error('Registration failed. Please try again.');
+        state.error = action.payload || "Registration failed";
+        toast.error("Registration failed. Please try again.");
       });
   },
 });
