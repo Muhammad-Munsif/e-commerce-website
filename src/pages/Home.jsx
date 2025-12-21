@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   Sparkles,
@@ -9,71 +9,91 @@ import {
   Gem,
   Wallet,
   SprayCan,
-} from 'lucide-react'
-import ProductCard from '../components/ProductCard'
-import { useSelector } from 'react-redux'
-import { selectTheme } from '../redux/slices/themeSlice'
+} from "lucide-react";
+import ProductCard from "../components/ProductCard";
+import { useSelector } from "react-redux";
+import { selectTheme } from "../redux/slices/themeSlice";
 
 const Home = () => {
-  const theme = useSelector(selectTheme)
-  
+  const theme = useSelector(selectTheme);
+
   const featuredProducts = [
-    { 
-      uid: 1, 
-      name: 'Diamond Solitaire Ring', 
-      price: 1999.99, 
-      discount: 20, 
-      category: 'Rings', 
-      rating: 4.9, 
-      reviews: 128, 
-      image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=500&fit=crop' 
+    {
+      uid: 1,
+      name: "Diamond Solitaire Ring",
+      price: 1999.99,
+      discount: 20,
+      category: "Rings",
+      rating: 4.9,
+      reviews: 128,
+      image:
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=500&fit=crop",
     },
-    { 
-      uid: 2, 
-      name: 'Gold Pendant Necklace', 
-      price: 899.99, 
-      category: 'Pendants', 
-      rating: 4.7, 
-      reviews: 89, 
-      image: 'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&h=500&fit=crop' 
+    {
+      uid: 2,
+      name: "Gold Pendant Necklace",
+      price: 899.99,
+      category: "Pendants",
+      rating: 4.7,
+      reviews: 89,
+      image:
+        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500&h=500&fit=crop",
     },
-    { 
-      uid: 3, 
-      name: 'Premium Leather Wallet', 
-      price: 129.99, 
+    {
+      uid: 3,
+      name: "Premium Leather Wallet",
+      price: 129.99,
       discount: 15,
-      category: 'Wallets', 
-      rating: 4.7, 
-      reviews: 120, 
-      image: 'https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?w=500&h=500&fit=crop' 
+      category: "Wallets",
+      rating: 4.7,
+      reviews: 120,
+      image:
+        "https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?w=500&h=500&fit=crop",
     },
-    { 
-      uid: 4, 
-      name: 'Floral Eau de Parfum', 
-      price: 129.99, 
-      category: 'Perfumes', 
-      rating: 4.8, 
-      reviews: 256, 
-      image: 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&h=500&fit=crop' 
+    {
+      uid: 4,
+      name: "Floral Eau de Parfum",
+      price: 129.99,
+      category: "Perfumes",
+      rating: 4.8,
+      reviews: 256,
+      image:
+        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=500&h=500&fit=crop",
     },
-  ]
+  ];
 
   const features = [
-    { icon: <Truck className="w-6 h-6 md:w-8 md:h-8" />, title: 'Free Shipping', description: 'On orders over $100' },
-    { icon: <Shield className="w-6 h-6 md:w-8 md:h-8" />, title: 'Authenticity', description: '100% genuine products' },
-    { icon: <RefreshCw className="w-6 h-6 md:w-8 md:h-8" />, title: 'Easy Returns', description: '30-day return policy' },
-    { icon: <Sparkles className="w-6 h-6 md:w-8 md:h-8" />, title: 'Premium Quality', description: 'Luxury guaranteed' },
-  ]
+    {
+      icon: <Truck className="w-6 h-6 md:w-8 md:h-8" />,
+      title: "Free Shipping",
+      description: "On orders over $100",
+    },
+    {
+      icon: <Shield className="w-6 h-6 md:w-8 md:h-8" />,
+      title: "Authenticity",
+      description: "100% genuine products",
+    },
+    {
+      icon: <RefreshCw className="w-6 h-6 md:w-8 md:h-8" />,
+      title: "Easy Returns",
+      description: "30-day return policy",
+    },
+    {
+      icon: <Sparkles className="w-6 h-6 md:w-8 md:h-8" />,
+      title: "Premium Quality",
+      description: "Luxury guaranteed",
+    },
+  ];
 
   const perfumeScents = [
-    { name: 'Floral', icon: '🌺', color: 'from-pink-100 to-rose-100' },
-    { name: 'Woody', icon: '🌲', color: 'from-amber-100 to-yellow-100' },
-    { name: 'Fresh', icon: '🍃', color: 'from-green-100 to-emerald-100' },
-    { name: 'Oriental', icon: '🕌', color: 'from-orange-100 to-red-100' },
-    { name: 'Citrus', icon: '🍊', color: 'from-yellow-100 to-orange-100' },
-    { name: 'Gourmand', icon: '🍰', color: 'from-brown-100 to-amber-100' },
-    { name: 'Aquatic', icon: '🌊', color: 'from-blue-100 to-cyan-100' },
-  ]
+    { name: "Floral", icon: "🌺", color: "from-pink-100 to-rose-100" },
+    { name: "Woody", icon: "🌲", color: "from-amber-100 to-yellow-100" },
+    { name: "Fresh", icon: "🍃", color: "from-green-100 to-emerald-100" },
+    { name: "Oriental", icon: "🕌", color: "from-orange-100 to-red-100" },
+    { name: "Citrus", icon: "🍊", color: "from-yellow-100 to-orange-100" },
+    { name: "Gourmand", icon: "🍰", color: "from-brown-100 to-amber-100" },
+    { name: "Aquatic", icon: "🌊", color: "from-blue-100 to-cyan-100" },
+  ];
 
   return (
     <div className="bg-gray-50 dark:bg-gray-900">
@@ -87,7 +107,8 @@ const Home = () => {
                 Discover <span className="text-gold">Luxury</span> Redefined
               </h1>
               <p className="text-base md:text-xl mb-6 md:mb-8 text-gray-300">
-                Exquisite jewelry, premium wallets, and captivating perfumes. Elevate your style with our curated collection.
+                Exquisite jewelry, premium wallets, and captivating perfumes.
+                Elevate your style with our curated collection.
               </p>
               <Link
                 to="/shop"
@@ -100,16 +121,25 @@ const Home = () => {
             <div className="lg:w-1/2 mt-8 lg:mt-0">
               <div className="grid grid-cols-2 gap-3 md:gap-4">
                 {featuredProducts.slice(0, 4).map((product) => (
-                  <div key={product.uid} className="bg-white rounded-xl p-3 md:p-4 shadow-2xl transform hover:-translate-y-1 transition">
+                  <div
+                    key={product.uid}
+                    className="bg-white rounded-xl p-3 md:p-4 shadow-2xl transform hover:-translate-y-1 transition"
+                  >
                     <img
                       src={product.image}
                       alt={product.name}
                       className="w-full h-32 md:h-40 object-cover rounded-lg mb-2 md:mb-3"
                     />
-                    <h3 className="font-semibold text-xs md:text-sm mb-1 truncate">{product.name}</h3>
+                    <h3 className="font-semibold text-xs md:text-sm mb-1 truncate">
+                      {product.name}
+                    </h3>
                     <div className="flex justify-between items-center">
-                      <span className="text-base md:text-lg font-bold text-gold">${product.price}</span>
-                      <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">{product.category}</span>
+                      <span className="text-base md:text-lg font-bold text-gold">
+                        ${product.price}
+                      </span>
+                      <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                        {product.category}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -124,12 +154,19 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition">
+              <div
+                key={index}
+                className="text-center p-4 md:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition"
+              >
                 <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gold text-white rounded-full mb-3 md:mb-4">
                   {feature.icon}
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">{feature.description}</p>
+                <h3 className="text-lg md:text-xl font-semibold mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
@@ -143,7 +180,10 @@ const Home = () => {
             <h2 className="text-2xl md:text-3xl font-playfair font-bold text-gray-900 dark:text-white mb-4 md:mb-0">
               Featured Products
             </h2>
-            <Link to="/shop" className="text-gold hover:text-yellow-600 font-semibold flex items-center">
+            <Link
+              to="/shop"
+              className="text-gold hover:text-yellow-600 font-semibold flex items-center"
+            >
               View All
               <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
@@ -162,7 +202,7 @@ const Home = () => {
           <h2 className="text-2xl md:text-3xl font-playfair font-bold text-center mb-8 md:mb-12">
             Explore Our Collections
           </h2>
-          
+
           {/* Category Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {/* Jewelry */}
@@ -173,8 +213,12 @@ const Home = () => {
               <div className="h-48 md:h-64 bg-gradient-to-br from-gold/20 to-bronze/20 flex items-center justify-center">
                 <div className="text-center">
                   <Gem className="w-12 h-12 md:w-16 md:h-16 text-gold mx-auto mb-3 md:mb-4" />
-                  <h3 className="text-xl md:text-2xl font-playfair font-bold">Jewelry</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mt-2">Exquisite rings & pendants</p>
+                  <h3 className="text-xl md:text-2xl font-playfair font-bold">
+                    Jewelry
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mt-2">
+                    Exquisite rings & pendants
+                  </p>
                 </div>
               </div>
             </Link>
@@ -187,8 +231,12 @@ const Home = () => {
               <div className="h-48 md:h-64 bg-gradient-to-br from-gray-900/20 to-gray-800/20 flex items-center justify-center">
                 <div className="text-center text-white">
                   <Wallet className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4" />
-                  <h3 className="text-xl md:text-2xl font-playfair font-bold">Wallets</h3>
-                  <p className="text-gray-300 mt-2">Premium leather & designer</p>
+                  <h3 className="text-xl md:text-2xl font-playfair font-bold">
+                    Wallets
+                  </h3>
+                  <p className="text-gray-300 mt-2">
+                    Premium leather & designer
+                  </p>
                 </div>
               </div>
             </Link>
@@ -201,8 +249,12 @@ const Home = () => {
               <div className="h-48 md:h-64 bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 flex items-center justify-center">
                 <div className="text-center">
                   <SprayCan className="w-12 h-12 md:w-16 md:h-16 text-purple-600 dark:text-purple-400 mx-auto mb-3 md:mb-4" />
-                  <h3 className="text-xl md:text-2xl font-playfair font-bold">Perfumes</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mt-2">Signature scents</p>
+                  <h3 className="text-xl md:text-2xl font-playfair font-bold">
+                    Perfumes
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-300 mt-2">
+                    Signature scents
+                  </p>
                 </div>
               </div>
             </Link>
@@ -218,7 +270,8 @@ const Home = () => {
               Discover 7 Signature Scents
             </h2>
             <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              From floral to aquatic, explore our curated collection of premium perfumes
+              From floral to aquatic, explore our curated collection of premium
+              perfumes
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-7 gap-3 md:gap-4">
@@ -228,7 +281,9 @@ const Home = () => {
                 to={`/category/perfumes/${scent.name.toLowerCase()}`}
                 className="bg-white dark:bg-gray-800 p-3 md:p-4 rounded-xl text-center hover:shadow-xl transition hover:-translate-y-1 md:hover:-translate-y-2 group"
               >
-                <div className={`w-10 h-10 md:w-16 md:h-16 ${scent.color} rounded-full mx-auto mb-2 md:mb-3 flex items-center justify-center group-hover:scale-110 transition`}>
+                <div
+                  className={`w-10 h-10 md:w-16 md:h-16 ${scent.color} rounded-full mx-auto mb-2 md:mb-3 flex items-center justify-center group-hover:scale-110 transition`}
+                >
                   <span className="text-xl md:text-2xl">{scent.icon}</span>
                 </div>
                 <h4 className="font-semibold text-gray-800 dark:text-white text-sm md:text-base mb-1">
@@ -249,7 +304,8 @@ const Home = () => {
               Limited Time Offer
             </h2>
             <p className="text-lg md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto">
-              Get 25% off on your first purchase. Use code: <span className="font-bold">WELCOME25</span>
+              Get 25% off on your first purchase. Use code:{" "}
+              <span className="font-bold">WELCOME25</span>
             </p>
             <Link
               to="/shop"
@@ -261,12 +317,10 @@ const Home = () => {
         </div>
       </section>
     </div>
-  )
-}
+  );
+};
 
-export default Home
-
-
+export default Home;
 
 // import React from 'react';
 // import { Link } from 'react-router-dom';
